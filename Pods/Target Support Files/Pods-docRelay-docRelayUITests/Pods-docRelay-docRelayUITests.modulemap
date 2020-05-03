@@ -1,0 +1,6 @@
+framework module Pods_docRelay_docRelayUITests {
+  umbrella header "Pods-docRelay-docRelayUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

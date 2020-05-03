@@ -3,18 +3,35 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BC8A2CBCB1D87D461A5A2CA /* Pods_docRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC62958DBACA9ED9A4C9EC5 /* Pods_docRelay.framework */; };
+		A14409D9B86798E409E639E6 /* Pods_docRelay_docRelayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693DED7F1F04AA358653F5E9 /* Pods_docRelay_docRelayUITests.framework */; };
+		A278DB9025107ED9E22A227F /* Pods_docRelayTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E5502536D144F6CE3F04C7 /* Pods_docRelayTests.framework */; };
+		BD1090B8245D53740055D04E /* DocumentFillingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1090B7245D53740055D04E /* DocumentFillingView.swift */; };
+		BD3215A2245F18C2004DC9B2 /* CreateDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3215A1245F18C2004DC9B2 /* CreateDocumentView.swift */; };
 		BD9A0A62245B41A3006E97A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A61245B41A3006E97A0 /* AppDelegate.swift */; };
 		BD9A0A64245B41A3006E97A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A63245B41A3006E97A0 /* SceneDelegate.swift */; };
-		BD9A0A66245B41A3006E97A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A65245B41A3006E97A0 /* ContentView.swift */; };
+		BD9A0A66245B41A3006E97A0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A65245B41A3006E97A0 /* HomeView.swift */; };
 		BD9A0A68245B41A3006E97A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD9A0A67245B41A3006E97A0 /* Assets.xcassets */; };
 		BD9A0A6B245B41A3006E97A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD9A0A6A245B41A3006E97A0 /* Preview Assets.xcassets */; };
 		BD9A0A6E245B41A3006E97A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD9A0A6C245B41A3006E97A0 /* LaunchScreen.storyboard */; };
 		BD9A0A79245B41A3006E97A0 /* docRelayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A78245B41A3006E97A0 /* docRelayTests.swift */; };
 		BD9A0A84245B41A4006E97A0 /* docRelayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A83245B41A4006E97A0 /* docRelayUITests.swift */; };
+		BD9A0A92245B4208006E97A0 /* Webview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A91245B4208006E97A0 /* Webview.swift */; };
+		BD9A0A96245C3837006E97A0 /* DocRelayDataEnviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A95245C3837006E97A0 /* DocRelayDataEnviroment.swift */; };
+		BD9A0A99245C38A8006E97A0 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A98245C38A7006E97A0 /* DocumentModel.swift */; };
+		BD9A0A9B245C3CFA006E97A0 /* DocumentFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9A0A9A245C3CFA006E97A0 /* DocumentFieldModel.swift */; };
+		BD9A0A9D245C575D006E97A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BD9A0A9C245C575D006E97A0 /* GoogleService-Info.plist */; };
+		BDB37063245D8210009E05F7 /* HomeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB37062245D8210009E05F7 /* HomeTabBar.swift */; };
+		BDB37065245D9501009E05F7 /* HomeDocumentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB37064245D9501009E05F7 /* HomeDocumentsView.swift */; };
+		BDB37067245D950F009E05F7 /* HomePersonalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB37066245D950F009E05F7 /* HomePersonalView.swift */; };
+		BDB37069245DDCE0009E05F7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB37068245DDCE0009E05F7 /* Extensions.swift */; };
+		BDC76693245C9CB000E2EF9B /* DocumentModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC76692245C9CB000E2EF9B /* DocumentModelCell.swift */; };
+		BDE37C1B245EF87B0093EEF4 /* AddButtonViewMofifyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE37C1A245EF87B0093EEF4 /* AddButtonViewMofifyer.swift */; };
+		BDE37C1D245EFB900093EEF4 /* AddButtonPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE37C1C245EFB900093EEF4 /* AddButtonPopOver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +52,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1070BCCF140BEC8EF40531C5 /* Pods-docRelayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docRelayTests.debug.xcconfig"; path = "Target Support Files/Pods-docRelayTests/Pods-docRelayTests.debug.xcconfig"; sourceTree = "<group>"; };
+		52B148E3B9568A70F2BDEE02 /* Pods-docRelay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docRelay.debug.xcconfig"; path = "Target Support Files/Pods-docRelay/Pods-docRelay.debug.xcconfig"; sourceTree = "<group>"; };
+		5BC62958DBACA9ED9A4C9EC5 /* Pods_docRelay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_docRelay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		693DED7F1F04AA358653F5E9 /* Pods_docRelay_docRelayUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_docRelay_docRelayUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72300A312FE48900AA21AAFE /* Pods-docRelay-docRelayUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docRelay-docRelayUITests.release.xcconfig"; path = "Target Support Files/Pods-docRelay-docRelayUITests/Pods-docRelay-docRelayUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BD1090B7245D53740055D04E /* DocumentFillingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFillingView.swift; sourceTree = "<group>"; };
+		BD3215A1245F18C2004DC9B2 /* CreateDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDocumentView.swift; sourceTree = "<group>"; };
 		BD9A0A5E245B41A3006E97A0 /* docRelay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = docRelay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD9A0A61245B41A3006E97A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD9A0A63245B41A3006E97A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BD9A0A65245B41A3006E97A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BD9A0A65245B41A3006E97A0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BD9A0A67245B41A3006E97A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD9A0A6A245B41A3006E97A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BD9A0A6D245B41A3006E97A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +73,22 @@
 		BD9A0A7F245B41A4006E97A0 /* docRelayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = docRelayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD9A0A83245B41A4006E97A0 /* docRelayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = docRelayUITests.swift; sourceTree = "<group>"; };
 		BD9A0A85245B41A4006E97A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD9A0A91245B4208006E97A0 /* Webview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webview.swift; sourceTree = "<group>"; };
+		BD9A0A95245C3837006E97A0 /* DocRelayDataEnviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocRelayDataEnviroment.swift; sourceTree = "<group>"; };
+		BD9A0A98245C38A7006E97A0 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
+		BD9A0A9A245C3CFA006E97A0 /* DocumentFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentFieldModel.swift; sourceTree = "<group>"; };
+		BD9A0A9C245C575D006E97A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDB37062245D8210009E05F7 /* HomeTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBar.swift; sourceTree = "<group>"; };
+		BDB37064245D9501009E05F7 /* HomeDocumentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDocumentsView.swift; sourceTree = "<group>"; };
+		BDB37066245D950F009E05F7 /* HomePersonalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePersonalView.swift; sourceTree = "<group>"; };
+		BDB37068245DDCE0009E05F7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BDC76692245C9CB000E2EF9B /* DocumentModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModelCell.swift; sourceTree = "<group>"; };
+		BDE37C1A245EF87B0093EEF4 /* AddButtonViewMofifyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonViewMofifyer.swift; sourceTree = "<group>"; };
+		BDE37C1C245EFB900093EEF4 /* AddButtonPopOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonPopOver.swift; sourceTree = "<group>"; };
+		BE5C0121E57E7208820AC812 /* Pods-docRelay-docRelayUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docRelay-docRelayUITests.debug.xcconfig"; path = "Target Support Files/Pods-docRelay-docRelayUITests/Pods-docRelay-docRelayUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C6DF627DE4B46B1F08CD57EC /* Pods-docRelayTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docRelayTests.release.xcconfig"; path = "Target Support Files/Pods-docRelayTests/Pods-docRelayTests.release.xcconfig"; sourceTree = "<group>"; };
+		D3E5502536D144F6CE3F04C7 /* Pods_docRelayTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_docRelayTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5E098C1DAC16673F401E828 /* Pods-docRelay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-docRelay.release.xcconfig"; path = "Target Support Files/Pods-docRelay/Pods-docRelay.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BC8A2CBCB1D87D461A5A2CA /* Pods_docRelay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A278DB9025107ED9E22A227F /* Pods_docRelayTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +112,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14409D9B86798E409E639E6 /* Pods_docRelay_docRelayUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C6A099E35E6C6EDA01EB00B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5BC62958DBACA9ED9A4C9EC5 /* Pods_docRelay.framework */,
+				693DED7F1F04AA358653F5E9 /* Pods_docRelay_docRelayUITests.framework */,
+				D3E5502536D144F6CE3F04C7 /* Pods_docRelayTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C9D461C1C5BA6FDECF90E4E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				52B148E3B9568A70F2BDEE02 /* Pods-docRelay.debug.xcconfig */,
+				F5E098C1DAC16673F401E828 /* Pods-docRelay.release.xcconfig */,
+				BE5C0121E57E7208820AC812 /* Pods-docRelay-docRelayUITests.debug.xcconfig */,
+				72300A312FE48900AA21AAFE /* Pods-docRelay-docRelayUITests.release.xcconfig */,
+				1070BCCF140BEC8EF40531C5 /* Pods-docRelayTests.debug.xcconfig */,
+				C6DF627DE4B46B1F08CD57EC /* Pods-docRelayTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BD9A0A55245B41A3006E97A0 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +149,8 @@
 				BD9A0A77245B41A3006E97A0 /* docRelayTests */,
 				BD9A0A82245B41A4006E97A0 /* docRelayUITests */,
 				BD9A0A5F245B41A3006E97A0 /* Products */,
+				4C9D461C1C5BA6FDECF90E4E /* Pods */,
+				1C6A099E35E6C6EDA01EB00B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,10 +167,15 @@
 		BD9A0A60245B41A3006E97A0 /* docRelay */ = {
 			isa = PBXGroup;
 			children = (
+				BDE37C19245EF8600093EEF4 /* ViewModifyers */,
+				BD9A0A97245C3895006E97A0 /* Models */,
+				BD9A0A94245C3813006E97A0 /* Enviroments */,
+				BD9A0A93245C3805006E97A0 /* Views */,
 				BD9A0A61245B41A3006E97A0 /* AppDelegate.swift */,
 				BD9A0A63245B41A3006E97A0 /* SceneDelegate.swift */,
-				BD9A0A65245B41A3006E97A0 /* ContentView.swift */,
+				BD9A0A65245B41A3006E97A0 /* HomeView.swift */,
 				BD9A0A67245B41A3006E97A0 /* Assets.xcassets */,
+				BD9A0A9C245C575D006E97A0 /* GoogleService-Info.plist */,
 				BD9A0A6C245B41A3006E97A0 /* LaunchScreen.storyboard */,
 				BD9A0A6F245B41A3006E97A0 /* Info.plist */,
 				BD9A0A69245B41A3006E97A0 /* Preview Content */,
@@ -136,6 +209,47 @@
 			path = docRelayUITests;
 			sourceTree = "<group>";
 		};
+		BD9A0A93245C3805006E97A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD9A0A91245B4208006E97A0 /* Webview.swift */,
+				BDC76692245C9CB000E2EF9B /* DocumentModelCell.swift */,
+				BD1090B7245D53740055D04E /* DocumentFillingView.swift */,
+				BDB37062245D8210009E05F7 /* HomeTabBar.swift */,
+				BDB37064245D9501009E05F7 /* HomeDocumentsView.swift */,
+				BDB37066245D950F009E05F7 /* HomePersonalView.swift */,
+				BDE37C1C245EFB900093EEF4 /* AddButtonPopOver.swift */,
+				BD3215A1245F18C2004DC9B2 /* CreateDocumentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BD9A0A94245C3813006E97A0 /* Enviroments */ = {
+			isa = PBXGroup;
+			children = (
+				BD9A0A95245C3837006E97A0 /* DocRelayDataEnviroment.swift */,
+				BDB37068245DDCE0009E05F7 /* Extensions.swift */,
+			);
+			path = Enviroments;
+			sourceTree = "<group>";
+		};
+		BD9A0A97245C3895006E97A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD9A0A98245C38A7006E97A0 /* DocumentModel.swift */,
+				BD9A0A9A245C3CFA006E97A0 /* DocumentFieldModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BDE37C19245EF8600093EEF4 /* ViewModifyers */ = {
+			isa = PBXGroup;
+			children = (
+				BDE37C1A245EF87B0093EEF4 /* AddButtonViewMofifyer.swift */,
+			);
+			path = ViewModifyers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +257,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD9A0A88245B41A4006E97A0 /* Build configuration list for PBXNativeTarget "docRelay" */;
 			buildPhases = (
+				71BF2FD9E3E8657B68731506 /* [CP] Check Pods Manifest.lock */,
 				BD9A0A5A245B41A3006E97A0 /* Sources */,
 				BD9A0A5B245B41A3006E97A0 /* Frameworks */,
 				BD9A0A5C245B41A3006E97A0 /* Resources */,
+				585BC610A3C081A6FD3FF767 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -160,6 +276,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD9A0A8B245B41A4006E97A0 /* Build configuration list for PBXNativeTarget "docRelayTests" */;
 			buildPhases = (
+				B11A28AAD027ABB9A16D45EF /* [CP] Check Pods Manifest.lock */,
 				BD9A0A70245B41A3006E97A0 /* Sources */,
 				BD9A0A71245B41A3006E97A0 /* Frameworks */,
 				BD9A0A72245B41A3006E97A0 /* Resources */,
@@ -178,9 +295,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD9A0A8E245B41A4006E97A0 /* Build configuration list for PBXNativeTarget "docRelayUITests" */;
 			buildPhases = (
+				F9E23E4787EDDA05CD66A852 /* [CP] Check Pods Manifest.lock */,
 				BD9A0A7B245B41A4006E97A0 /* Sources */,
 				BD9A0A7C245B41A4006E97A0 /* Frameworks */,
 				BD9A0A7D245B41A4006E97A0 /* Resources */,
+				2247AB91836043FF733DB88D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD9A0A6E245B41A3006E97A0 /* LaunchScreen.storyboard in Resources */,
+				BD9A0A9D245C575D006E97A0 /* GoogleService-Info.plist in Resources */,
 				BD9A0A6B245B41A3006E97A0 /* Preview Assets.xcassets in Resources */,
 				BD9A0A68245B41A3006E97A0 /* Assets.xcassets in Resources */,
 			);
@@ -262,14 +382,130 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2247AB91836043FF733DB88D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-docRelay-docRelayUITests/Pods-docRelay-docRelayUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-docRelay-docRelayUITests/Pods-docRelay-docRelayUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-docRelay-docRelayUITests/Pods-docRelay-docRelayUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		585BC610A3C081A6FD3FF767 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-docRelay/Pods-docRelay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-docRelay/Pods-docRelay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-docRelay/Pods-docRelay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		71BF2FD9E3E8657B68731506 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-docRelay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B11A28AAD027ABB9A16D45EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-docRelayTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9E23E4787EDDA05CD66A852 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-docRelay-docRelayUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BD9A0A5A245B41A3006E97A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDE37C1D245EFB900093EEF4 /* AddButtonPopOver.swift in Sources */,
+				BD3215A2245F18C2004DC9B2 /* CreateDocumentView.swift in Sources */,
+				BDB37065245D9501009E05F7 /* HomeDocumentsView.swift in Sources */,
+				BDB37067245D950F009E05F7 /* HomePersonalView.swift in Sources */,
+				BD9A0A96245C3837006E97A0 /* DocRelayDataEnviroment.swift in Sources */,
 				BD9A0A62245B41A3006E97A0 /* AppDelegate.swift in Sources */,
+				BDB37063245D8210009E05F7 /* HomeTabBar.swift in Sources */,
+				BD1090B8245D53740055D04E /* DocumentFillingView.swift in Sources */,
+				BDC76693245C9CB000E2EF9B /* DocumentModelCell.swift in Sources */,
+				BD9A0A92245B4208006E97A0 /* Webview.swift in Sources */,
+				BDB37069245DDCE0009E05F7 /* Extensions.swift in Sources */,
+				BDE37C1B245EF87B0093EEF4 /* AddButtonViewMofifyer.swift in Sources */,
 				BD9A0A64245B41A3006E97A0 /* SceneDelegate.swift in Sources */,
-				BD9A0A66245B41A3006E97A0 /* ContentView.swift in Sources */,
+				BD9A0A99245C38A8006E97A0 /* DocumentModel.swift in Sources */,
+				BD9A0A9B245C3CFA006E97A0 /* DocumentFieldModel.swift in Sources */,
+				BD9A0A66245B41A3006E97A0 /* HomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +668,7 @@
 		};
 		BD9A0A89245B41A4006E97A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52B148E3B9568A70F2BDEE02 /* Pods-docRelay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -452,6 +689,7 @@
 		};
 		BD9A0A8A245B41A4006E97A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5E098C1DAC16673F401E828 /* Pods-docRelay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -472,6 +710,7 @@
 		};
 		BD9A0A8C245B41A4006E97A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1070BCCF140BEC8EF40531C5 /* Pods-docRelayTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -494,6 +733,7 @@
 		};
 		BD9A0A8D245B41A4006E97A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6DF627DE4B46B1F08CD57EC /* Pods-docRelayTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -516,6 +756,7 @@
 		};
 		BD9A0A8F245B41A4006E97A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE5C0121E57E7208820AC812 /* Pods-docRelay-docRelayUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -536,6 +777,7 @@
 		};
 		BD9A0A90245B41A4006E97A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72300A312FE48900AA21AAFE /* Pods-docRelay-docRelayUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
