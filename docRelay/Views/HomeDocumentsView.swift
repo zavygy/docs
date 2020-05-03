@@ -17,12 +17,12 @@ struct HomeDocumentsView: View {
             VStack{
                  HStack {
                      Picker("", selection: $pageUsing) {
-//                        withAnimation {
+                        withAnimation {
                          Text("Loaded").tag(0)
-//                        }
-//                        withAnimation {
+                        }
+                        withAnimation {
                          Text("Created").tag(1)
-//                        }
+                        }
                      }.pickerStyle(SegmentedPickerStyle())
                          .padding(.horizontal, 40)
                  }
