@@ -21,6 +21,7 @@
 		BD4CF17B251C9D3300F14CB6 /* PDFRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4CF17A251C9D3300F14CB6 /* PDFRelay.swift */; };
 		BD4CF183251C9D5000F14CB6 /* SetupDocumentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4CF182251C9D5000F14CB6 /* SetupDocumentFieldView.swift */; };
 		BD4CF188251CADEB00F14CB6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4CF187251CADEB00F14CB6 /* Extensions.swift */; };
+		BD4D7ACE25288F9C008AE755 /* DetailedLoadedDocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */; };
 		BD72F14D25273CF700F5FA66 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = BD72F14C25273CF700F5FA66 /* CodeScanner */; };
 		BD78BF5D251C9A28000996B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78BF5C251C9A28000996B2 /* AppDelegate.swift */; };
 		BD78BF5F251C9A28000996B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78BF5E251C9A28000996B2 /* SceneDelegate.swift */; };
@@ -76,6 +77,7 @@
 		BD4CF17A251C9D3300F14CB6 /* PDFRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRelay.swift; sourceTree = "<group>"; };
 		BD4CF182251C9D5000F14CB6 /* SetupDocumentFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupDocumentFieldView.swift; sourceTree = "<group>"; };
 		BD4CF187251CADEB00F14CB6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedLoadedDocumentModel.swift; sourceTree = "<group>"; };
 		BD78BF59251C9A28000996B2 /* document.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = document.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD78BF5C251C9A28000996B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD78BF5E251C9A28000996B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				BDAE77572525F1E2005E8725 /* SharedResultView.swift */,
 				BD4AE7AE2526058B00700001 /* CreateDocumentView.swift */,
 				BD4AE7B325260BD000700001 /* DocumentPicker.swift */,
+				BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				BD78BF91251C9A8E000996B2 /* DocumentModel.swift in Sources */,
 				BD78BF61251C9A28000996B2 /* ContentView.swift in Sources */,
 				BD4AE7B425260BD000700001 /* DocumentPicker.swift in Sources */,
+				BD4D7ACE25288F9C008AE755 /* DetailedLoadedDocumentModel.swift in Sources */,
 				BD4CF16B251C9CD500F14CB6 /* DocumentListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -685,10 +689,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = document/document.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"document/Preview Content\"";
 				DEVELOPMENT_TEAM = TPM5Z76U49;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = document/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,7 +702,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = zavygy.documents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -708,10 +714,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = document/document.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"document/Preview Content\"";
 				DEVELOPMENT_TEAM = TPM5Z76U49;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = document/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -719,7 +727,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = zavygy.documents;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

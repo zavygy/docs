@@ -18,9 +18,6 @@ class GlobalEnviroment: ObservableObject {
     }
     
     func downloadDocument(key: String, comletion: @escaping(Bool) -> Void) {
-        var document: DocumentModel?
-        
-        // Firebase part
         DispatchQueue.main.async {
             self.dbReference.child("/shared/\(key)").observeSingleEvent(of: .value, with: {(snapshot) in
                 let value = snapshot.value as? NSDictionary
@@ -28,7 +25,8 @@ class GlobalEnviroment: ObservableObject {
                 let url = value?["url"] as? String ?? ""
                 
                 var fields:[DocumentField] = []
-            
+                var document = DocumentModel(id: key, name: name, url: url)
+
                 let fields_snap = snapshot.childSnapshot(forPath: "fields")
                 for f_snap in fields_snap.children.allObjects as! [DataSnapshot] {
                     let val = f_snap.value as? NSDictionary
@@ -43,14 +41,28 @@ class GlobalEnviroment: ObservableObject {
                     let desc = val?["desc"] as? String ?? ""
                     fields.append(DocumentField(rect: rectan, string: desc, type: fieldTypeFromString(type)))
                 }
+                print(fields)
+                document.fieldsToFill = fields
+                print(document.fieldsToFill)
                 
                 if url != "" {
-                    document = DocumentModel(id: key, name: name, url: url, fields: fields)
+                    let cdDoc = CDDocumentModel(context: self.managedObjectContext!)
+                    cdDoc.id = document.id
+                    cdDoc.groupMode = "0"
+                    cdDoc.cdId = document.cdID
+                    cdDoc.url = document.url ?? ""
+                    cdDoc.name = document.name
+                    do {
+                        try self.managedObjectContext!.save()
+                    } catch {
+                        print(error)
+                    }
+                    
                     
                     for i in fields {
                         let f = CDDocumentField(context: self.managedObjectContext!)
                         f.desc = i.description
-                        f.parent = key
+                        f.parent = document.cdID
                         f.type = stringFromFieldType(i.type)
                         f.x = "\(i.rect.origin.x)"
                         f.y = "\(i.rect.origin.y)"
@@ -62,19 +74,9 @@ class GlobalEnviroment: ObservableObject {
                             print(error)
                         }
                     }
-                    let cdDoc = CDDocumentModel(context: self.managedObjectContext!)
-                    cdDoc.id = document?.id ?? ""
-                    cdDoc.groupMode = "0"
-                    cdDoc.url = document?.url ?? ""
-                    cdDoc.name = document?.name ?? ""
-                    do {
-                        try self.managedObjectContext!.save()
-                    } catch {
-                        print(error)
-                    }
-                    withAnimation {
-                        self.loadedDocuments.append(document!)
-                    }
+                    self.loadedDocuments.append(document)
+
+                   
                 }
                 
                 comletion(true)
@@ -103,13 +105,13 @@ class GlobalEnviroment: ObservableObject {
         }
     }
     
-    func appendField(docID: String, _ selection: PDFSelection, description: String, type: FieldType) {
+    func appendField(docCDId: String, _ selection: PDFSelection, description: String, type: FieldType) {
         let newField = DocumentField(rect: selection.bounds(for: selection.pages[0]), string: description, type: type)
         print(newField.rect)
         
         let f = CDDocumentField(context: self.managedObjectContext!)
         f.desc = newField.description
-        f.parent = docID
+        f.parent = docCDId
         f.type = stringFromFieldType(newField.type)
         f.x = "\(newField.rect.origin.x)"
         f.y = "\(newField.rect.origin.y)"
@@ -122,7 +124,7 @@ class GlobalEnviroment: ObservableObject {
         }
         //(70.464, 765.29628, 99.0318, 19.263720000000035)
         for i in 0..<createdDocuments.count {
-            if (createdDocuments[i].id == docID) {
+            if (createdDocuments[i].cdID == docCDId) {
                 createdDocuments[i].addField(selection, description: description, type: type)
             }
         }
@@ -134,7 +136,7 @@ class GlobalEnviroment: ObservableObject {
         for i in document.fieldsToFill {
             let f = CDDocumentField(context: self.managedObjectContext!)
             f.desc = i.description
-            f.parent = document.id
+            f.parent = document.cdID
             f.type = stringFromFieldType(i.type)
             f.x = "\(i.rect.origin.x)"
             f.y = "\(i.rect.origin.y)"
@@ -149,6 +151,7 @@ class GlobalEnviroment: ObservableObject {
         let cdDoc = CDDocumentModel(context: self.managedObjectContext!)
         cdDoc.id = document.id
         cdDoc.groupMode = "1"
+        cdDoc.cdId = document.cdID
         cdDoc.name = document.name
         cdDoc.url = document.url
         do {
@@ -157,27 +160,7 @@ class GlobalEnviroment: ObservableObject {
             print(error)
         }
     }
-    
-    func deleteCreatedModel(_ model: DocumentModel) {
-        var deleteFields: Bool = true
-        var cnt = 0
-        for i in loadedDocuments {
-            if (i.id == model.id) {cnt += 1}
-        }
-        for i in createdDocuments {
-            if (i.id == model.id) {cnt += 1}
-        }
-        if (cnt >= 2) {deleteFields = false}
-        let cdDoc = CDDocumentModel(context: self.managedObjectContext!)
-        cdDoc.id = model.id
-        cdDoc.groupMode = "1"
-        cdDoc.name = model.name
-        cdDoc.url = model.url
-//        self.managedObjectContext?.delete(<#T##object: NSManagedObject##NSManagedObject#>)
-        
-        
-        
-    }
+  
     
     func loadDocuments(cdFields: FetchedResults<CDDocumentField>, cdDocuments: FetchedResults<CDDocumentModel>) {
         var downModels: [DocumentModel] = []
@@ -185,6 +168,7 @@ class GlobalEnviroment: ObservableObject {
 
         for cdDocModel in cdDocuments {
             let dm = DocumentModel(id: cdDocModel.id ?? "", name: cdDocModel.name ?? "", url: cdDocModel.url ?? "")
+            dm.cdID = cdDocModel.cdId ?? ""
             if (cdDocModel.groupMode == "0") {
                 downModels.append(dm)
             } else {
@@ -201,12 +185,12 @@ class GlobalEnviroment: ObservableObject {
             let f = DocumentField(rect: CGRect(x: x, y: y, width: width, height: height), string: cdFieldModel.desc ?? "", type: type)
             let par = cdFieldModel.parent ?? ""
             for i in 0..<downModels.count {
-                if (downModels[i].id == par) {
+                if (downModels[i].cdID == par) {
                     downModels[i].fieldsToFill.append(f)
                 }
             }
             for i in 0..<creatModels.count {
-                if (creatModels[i].id == par) {
+                if (creatModels[i].cdID == par) {
                     creatModels[i].fieldsToFill.append(f)
                 }
             }

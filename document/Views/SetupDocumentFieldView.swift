@@ -30,7 +30,7 @@ struct SetupDocumentFieldView: View {
             Spacer()
             Button("Save", action: {
                 print(fieldDescription)
-                globalEnviroment.appendField(docID: documentModel.id, selection!, description: fieldDescription, type: fieldTypeFromString(stringTypes[selectedFieldType]))
+                globalEnviroment.appendField(docCDId: documentModel.cdID, selection!, description: fieldDescription, type: fieldTypeFromString(stringTypes[selectedFieldType]))
               
                 selection?.color = UIColor(.orange)
                 onDismiss()

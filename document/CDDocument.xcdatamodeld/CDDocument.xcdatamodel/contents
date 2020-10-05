@@ -10,13 +10,14 @@
         <attribute name="y" optional="YES" attributeType="String"/>
     </entity>
     <entity name="CDDocumentModel" representedClassName=".CDDocumentModel" syncable="YES">
+        <attribute name="cdId" optional="YES" attributeType="String"/>
         <attribute name="groupMode" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CDDocumentModel" positionX="-3133.831970214844" positionY="-1625.856353759766" width="128" height="103"/>
         <element name="CDDocumentField" positionX="-3149.644104003906" positionY="-1813.431671142578" width="128" height="148"/>
+        <element name="CDDocumentModel" positionX="-3541.859802246094" positionY="-1794.905181884766" width="128" height="118"/>
     </elements>
 </model>

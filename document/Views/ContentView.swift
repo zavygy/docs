@@ -28,47 +28,35 @@ struct ContentView: View {
                 VStack {
                     List {
                         Section(header: Text("Downloaded")) {
-                            ForEach(globalEnviroment.loadedDocuments) { document in
-                                NavigationLink(destination: DetailedDocumentView(globalEnviroment: globalEnviroment, document: document)) {
+                            ForEach(globalEnviroment.loadedDocuments, id: \.cdID) { document in
+                                NavigationLink(destination: DetailedLoadedDocumentModel(globalEnviroment: globalEnviroment, document: document)) {
                                     DocumentListItem(documentModel: document)
                                 }
                             }.onDelete { indexSet in
-                                let delItem = globalEnviroment.loadedDocuments[indexSet.first!]
-
+                                    let delItem = globalEnviroment.loadedDocuments[indexSet.first!]
+                                    globalEnviroment.loadedDocuments.remove(at: indexSet.first!)
                                     for i in 0..<cdDocuments.count {
                                         let m = cdDocuments[i]
-                                        if (m.id! == delItem.id && m.groupMode! == "0") {
+                                        if (m.cdId! == delItem.cdID) {
                                             self.managedObjectContext.delete(cdDocuments[i])
                                             do {
                                                 try self.managedObjectContext.save()
                                             } catch {
                                                 print(error)
+                                                
                                             }
                                             break
                                         }
                                     }
-                                    var cnt = 0
-                                    var deleteFields: Bool = true
-                                    for i in globalEnviroment.loadedDocuments {
-                                        if (i.id == delItem.id) {cnt += 1}
-                                    }
-                                    for i in globalEnviroment.createdDocuments {
-                                        if (i.id == delItem.id) {cnt += 1}
-                                    }
-                                    globalEnviroment.loadedDocuments.remove(at: indexSet.first!)
-
-                                    if cnt >= 2 {
-                                        deleteFields = false
-                                    }
                                     
-                                    if (deleteFields) {
-                                        for i in 0..<cdFields.count {
-                                            if (cdFields[i].parent! == delItem.id) {
-                                                self.managedObjectContext.delete(cdFields[i])
-                                                
-                                            }
+                                    
+                                    for i in 0..<cdFields.count {
+                                        if (cdFields[i].parent! == delItem.cdID) {
+                                            self.managedObjectContext.delete(cdFields[i])
+                                            
                                         }
                                     }
+                                    
                                 do {
                                     try self.managedObjectContext.save()
                                 } catch {
@@ -77,16 +65,6 @@ struct ContentView: View {
                                     
                             }
                            
-//                            if (downloadingDocument == true) {
-//                                VStack {
-//                                    HStack {
-//                                        Spacer()
-//                                        ProgressView("Downloading").padding()
-//                                        Spacer()
-//                                    }
-//                                }
-//                            }
-                            
                             if (typeInIsPresented == true) {
 
                                 TextField("ID: ", text: $documentId, onCommit:  {
@@ -142,16 +120,17 @@ struct ContentView: View {
                         
                         
                         Section(header: Text("Created")) {
-                            ForEach(globalEnviroment.createdDocuments) { document in
-                                NavigationLink(destination: DetailedDocumentView(globalEnviroment: globalEnviroment, document: document)) {
+                            ForEach(globalEnviroment.createdDocuments, id: \.cdID) { document in
+                                NavigationLink(destination: DetailedDocumentView(managedObjectContext: managedObjectContext, cdDocuments: cdDocuments, cdFields: cdFields,  globalEnviroment: globalEnviroment, document: document)) {
                                     DocumentListItem(documentModel: document)
                                 }
                             }.onDelete { indexSet in
                                 let delItem = globalEnviroment.createdDocuments[indexSet.first!]
+                                globalEnviroment.createdDocuments.remove(at: indexSet.first!)
 
                                 for i in 0..<cdDocuments.count {
                                     let m = cdDocuments[i]
-                                    if (m.id! == delItem.id && m.groupMode! == "1") {
+                                    if (m.cdId! == delItem.cdID) {
                                         self.managedObjectContext.delete(cdDocuments[i])
                                         do {
                                             try self.managedObjectContext.save()
@@ -161,35 +140,20 @@ struct ContentView: View {
                                         break
                                     }
                                 }
-                                var cnt = 0
-                                var deleteFields: Bool = true
-                                for i in globalEnviroment.loadedDocuments {
-                                    if (i.id == delItem.id) {cnt += 1}
-                                }
-                                for i in globalEnviroment.createdDocuments {
-                                    if (i.id == delItem.id) {cnt += 1}
-                                }
                                 
-                                if cnt >= 2 {
-                                    deleteFields = false
-                                }
-                                
-                                if (deleteFields) {
-                                    for i in 0..<cdFields.count {
-                                        if (cdFields[i].parent! == delItem.id) {
-                                            self.managedObjectContext.delete(cdFields[i])
-                                            do {
-                                                try self.managedObjectContext.save()
-                                            } catch {
-                                                print(error)
-                                            }
+
+                                for i in 0..<cdFields.count {
+                                    if (cdFields[i].parent! == delItem.cdID) {
+                                        self.managedObjectContext.delete(cdFields[i])
+                                        do {
+                                            try self.managedObjectContext.save()
+                                        } catch {
+                                            print(error)
                                         }
                                     }
                                 }
+//
                                 
-                                
-                                globalEnviroment.createdDocuments.remove(at: indexSet.first!)
-
                             }
                             Button (action: addCreated, label: {
                                 HStack {
@@ -199,6 +163,7 @@ struct ContentView: View {
                                 }
                             }).sheet(isPresented: $createIsPresented, content: {
                                 CreateDocumentView(globalEnviroment: globalEnviroment, presentSelf: $createIsPresented)
+                                    .ignoresSafeArea()
                             })
                         }.cornerRadius(10.0)
                         

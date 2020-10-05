@@ -6,11 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 import PDFKit
 
 struct DetailedDocumentView: View {
+    var managedObjectContext: NSManagedObjectContext
+    var cdDocuments: FetchedResults<CDDocumentModel>
+    var cdFields: FetchedResults<CDDocumentField>
+
+    
     @ObservedObject var globalEnviroment: GlobalEnviroment
     @ObservedObject var document: DocumentModel
+
     @State private var pageState = 0
     @State private var sharedPresentMode: Bool = false
     
@@ -40,7 +47,8 @@ struct DetailedDocumentView: View {
                             Spacer()
                             Text(stringFromFieldType(field.type))
                         }.padding()
-                    }.onDelete(perform: removeField)
+                    }
+                    .onDelete(perform: removeField)
                     
                 }
             }
@@ -49,10 +57,26 @@ struct DetailedDocumentView: View {
     }
     
     func removeField(at offsets: IndexSet) {
+        let delField = document.fieldsToFill[offsets.first!]
+        print(delField)
+        for i in 0..<cdFields.count {
+            print(cdFields[i])
+            if (cdFields[i].parent! == document.cdID && cdFields[i].desc == delField.description) {
+                self.managedObjectContext.delete(cdFields[i])
+            }
+        }
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error)
+        }
+        
+        
         withAnimation {
             document.fieldsToFill.remove(atOffsets: offsets)
         }
-//        expenses.items.remove(atOffsets: offsets)
+        
     }
     
     func shareDocument() {

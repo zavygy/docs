@@ -26,8 +26,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let context = persistentContainer.viewContext
         let env = GlobalEnviroment()
         let contentView = ContentView(globalEnviroment: env).environment(\.managedObjectContext, context)
-            
-           
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

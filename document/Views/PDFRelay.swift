@@ -30,7 +30,6 @@ struct PDFRelay: View {
                             } else {
                                 print(pdfSelection?.string ?? "")
                                 shouldShowAddFieldButton = true
-                                
                             }
                         }
                         )).sheet(isPresented: $sheetIsPresented){ SetupDocumentFieldView(globalEnviroment: globalEnviroment, documentModel: document, selection: pdfSelection, onDismiss: {
@@ -40,7 +39,6 @@ struct PDFRelay: View {
                             .onDisappear {
                                 self.sheetIsPresented = false
                             }
-                        
                         }
             VStack {
                 Spacer()
@@ -56,7 +54,6 @@ struct PDFRelay: View {
                 }
             }
         }
-//            .allowsHitTesting(false)
          
     }
 }

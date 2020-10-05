@@ -9,12 +9,13 @@ import Foundation
 import PDFKit
 import CoreData
 
-class DocumentModel: Identifiable, ObservableObject {
+class DocumentModel: ObservableObject {
    
     let id: String // (key)
     @Published var name: String
     @Published var pdfData: Data? = nil
     @Published var url: String? = nil
+    var cdID: String = UUID().uuidString
     
     @Published var fieldsToFill: [DocumentField] = []
     
@@ -30,6 +31,7 @@ class DocumentModel: Identifiable, ObservableObject {
         self.id = id
         self.name = name
         self.url = url
+
     }
     
     init(id: String, name: String, url: String, fields: [DocumentField]) {
@@ -42,6 +44,7 @@ class DocumentModel: Identifiable, ObservableObject {
     
     func addField(_ selection: PDFSelection, description: String, type: FieldType) {
         let newField = DocumentField(rect: selection.bounds(for: selection.pages[0]), string: description, type: type)
+        
         print(newField.rect)
         //(70.464, 765.29628, 99.0318, 19.263720000000035)
 
@@ -60,12 +63,12 @@ class DocumentModel: Identifiable, ObservableObject {
     
 }
 
-class DocumentField: Identifiable {
+class DocumentField: Identifiable, ObservableObject {
     
     
     let rect: CGRect
     let description: String
-    var fillWith: String? = nil
+    @Published var fillWith: String? = nil
     let type: FieldType
     
     init(rect: CGRect, string: String, type: FieldType = .custom) {
@@ -138,6 +141,7 @@ public class CDDocumentModel: NSManagedObject, Identifiable {
     @NSManaged public var name: String?
     @NSManaged public var url: String?
     @NSManaged public var groupMode: String?
+    @NSManaged public var cdId: String?
 }
 
 public class CDDocumentField: NSManagedObject, Identifiable {
@@ -149,6 +153,9 @@ public class CDDocumentField: NSManagedObject, Identifiable {
     @NSManaged public var x: String?
     @NSManaged public var y: String?
 }
+
+
+
 
 extension CDDocumentField {
     static func getAllCDFields() -> NSFetchRequest<CDDocumentField> {

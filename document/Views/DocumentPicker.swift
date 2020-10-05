@@ -12,6 +12,7 @@ import Firebase
 struct DocumentPicker: UIViewControllerRepresentable {
     let documentName: String
     @Binding var url: String
+    @Binding var isDocPicked: Bool
     func makeCoordinator() -> DocumentPicker.Coordinator {
         return DocumentPicker.Coordinator(parent1: self, documentName: documentName)
     }
@@ -38,7 +39,7 @@ struct DocumentPicker: UIViewControllerRepresentable {
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             let storage = Storage.storage().reference()
-            
+            parent.isDocPicked = true
 
             guard urls.first!.startAccessingSecurityScopedResource() else { return }
             
@@ -59,6 +60,10 @@ struct DocumentPicker: UIViewControllerRepresentable {
                 })
             }
 //            print(urls)
+        }
+        
+        func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+            self.parent.url = ""
         }
         
         func loadFileFromLocalPath(_ localFilePath: URL) ->Data? {
