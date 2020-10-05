@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="20A5384c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DocumentModel" representedClassName="DocumentModel" syncable="YES" codeGenerationType="class">
+        <attribute name="fields" optional="YES" attributeType="Binary"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <fetchedProperty name="fetchedProperty" optional="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="DocumentModel"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="DocumentModel" positionX="-63" positionY="-18" width="128" height="110"/>
+    </elements>
+</model>

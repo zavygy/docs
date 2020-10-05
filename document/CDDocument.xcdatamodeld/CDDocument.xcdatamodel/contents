@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17507" systemVersion="20A5384c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDDocumentField" representedClassName=".CDDocumentField" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="height" optional="YES" attributeType="String"/>
+        <attribute name="parent" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="width" optional="YES" attributeType="String"/>
+        <attribute name="x" optional="YES" attributeType="String"/>
+        <attribute name="y" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CDDocumentModel" representedClassName=".CDDocumentModel" syncable="YES">
+        <attribute name="cdId" optional="YES" attributeType="String"/>
+        <attribute name="groupMode" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="CDDocumentField" positionX="-3149.644104003906" positionY="-1813.431671142578" width="128" height="148"/>
+        <element name="CDDocumentModel" positionX="-3541.859802246094" positionY="-1794.905181884766" width="128" height="118"/>
+    </elements>
+</model>
