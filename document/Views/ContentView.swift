@@ -13,6 +13,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     @FetchRequest(fetchRequest: CDDocumentModel.getAllCDDocs()) var cdDocuments: FetchedResults<CDDocumentModel>
     @FetchRequest(fetchRequest: CDDocumentField.getAllCDFields()) var cdFields: FetchedResults<CDDocumentField>
+    @FetchRequest(fetchRequest: CDPerData.getAllCDData()) var cdPerData: FetchedResults<CDPerData>
 
     @EnvironmentObject var partialSheetManager: PartialSheetManager
     @ObservedObject var globalEnviroment: GlobalEnviroment
@@ -22,6 +23,7 @@ struct ContentView: View {
     @State private var qrScanIsPresented: Bool = false
     @State private var downloadingDocument: Bool = false
     @State private var documentId: String = ""
+    @State private var personalDataIsPresented: Bool = false
     
     var body: some View {
         NavigationView {
@@ -165,7 +167,10 @@ struct ContentView: View {
                                 CreateDocumentView(globalEnviroment: globalEnviroment, presentSelf: $createIsPresented)
                                     .ignoresSafeArea()
                             })
+                            
+                            
                         }.cornerRadius(10.0)
+//
                         
                     }.listStyle(InsetGroupedListStyle())
                     .sheet(isPresented: $qrScanIsPresented, onDismiss: {
@@ -196,6 +201,18 @@ struct ContentView: View {
                     })
                     .navigationViewStyle(StackNavigationViewStyle())
                     .navigationBarTitle("Documents")
+                    .sheet(isPresented: $personalDataIsPresented, onDismiss: {
+                        self.personalDataIsPresented = false
+//                        self.globalEnviroment.savePersonalData()
+
+                    } ,content: {
+                        PersonalDataView(managedObjectContext: self.managedObjectContext, globalEnviroment: globalEnviroment)
+                                            })
+                    .navigationBarItems(trailing: Button(action: {
+                        self.personalDataIsPresented = true
+                    }){
+                        Image(systemName: "person.crop.circle").imageScale(.large)
+                    })
                     
                 }
                 
@@ -203,6 +220,10 @@ struct ContentView: View {
         }.onAppear {
             globalEnviroment.managedObjectContext = self.managedObjectContext
             globalEnviroment.loadDocuments(cdFields: cdFields, cdDocuments: cdDocuments)
+            globalEnviroment.personalData = []
+            for i in cdPerData {
+                globalEnviroment.personalData.append(TextPersonalInfo(i.info, type: fieldTypeFromString(i.type ?? ""), createdAt: i.createdAt ?? Date()))
+            }
         }
 
     }

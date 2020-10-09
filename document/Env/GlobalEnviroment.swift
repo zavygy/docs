@@ -11,11 +11,22 @@ class GlobalEnviroment: ObservableObject {
     
     @Published var loadedDocuments: [DocumentModel] = []
     @Published var createdDocuments: [DocumentModel] = []
+    @Published var personalData: [TextPersonalInfo] = []
+    
     let dbReference: DatabaseReference!
     init() {
         dbReference = Database.database().reference()
-//        loadDocuments()
+        let ud = UserDefaults.standard
+        
+        let decoded = ud.data(forKey: "personalData")
+        do {
+            try personalData = NSKeyedUnarchiver.unarchivedObject(ofClasses: [TextPersonalInfo.self], from: decoded ?? Data()) as! [TextPersonalInfo]
+        } catch {
+            print(error)
+        }
+        
     }
+    
     
     func downloadDocument(key: String, comletion: @escaping(Bool) -> Void) {
         DispatchQueue.main.async {
@@ -198,6 +209,57 @@ class GlobalEnviroment: ObservableObject {
         createdDocuments = creatModels
         loadedDocuments = downModels
     }
-//"https://firebasestorage.googleapis.com/v0/b/documentsbeta.appspot.com/o/documents%2Fsogi.pdf?alt=media&token=2f5fd96a-5651-433e-b519-b9b5b443d6fb"
+}
+
+class TextPersonalInfo: ObservableObject, NSCoding {
     
+    @Published var info: String?
+    var type: FieldType
+    var createdAt: Date
+    init(_ info: String? = nil, type: FieldType, createdAt: Date) {
+        self.info = info
+        self.type = type
+        self.createdAt = createdAt
+    }
+    
+    init() {
+        type = .custom
+        createdAt = Date()
+    }
+    
+    required convenience init?(coder decoder: NSCoder) {
+        self.init()
+
+        guard let info = decoder.decodeObject(forKey: "info") as? String
+        else {return nil }
+        
+        guard let type = decoder.decodeObject(forKey: "type") as? String
+        else {return nil }
+        
+        guard let date = decoder.decodeObject(forKey: "date") as? String
+        else {return nil }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+        
+        self.info = info
+        self.type = fieldTypeFromString(type)
+
+        self.createdAt = dateFormatter.date(from: date) ?? Date()
+
+    }
+
+    func encode(with coder: NSCoder) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        coder.encode(stringFromFieldType(self.type), forKey: "type")
+        coder.encode(info ?? "", forKey: "info")
+        coder.encode(dateFormatter.string(from: createdAt), forKey: "date")
+
+    }
 }

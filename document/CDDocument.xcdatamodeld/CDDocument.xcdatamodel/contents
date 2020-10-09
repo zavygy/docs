@@ -16,8 +16,14 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="CDPerData" representedClassName=".CDPerData" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="CDDocumentField" positionX="-3149.644104003906" positionY="-1813.431671142578" width="128" height="148"/>
         <element name="CDDocumentModel" positionX="-3541.859802246094" positionY="-1794.905181884766" width="128" height="118"/>
+        <element name="CDPerData" positionX="-3348" positionY="-1782.359619140625" width="128" height="88"/>
     </elements>
 </model>
