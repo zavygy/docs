@@ -22,6 +22,7 @@
 		BD4CF183251C9D5000F14CB6 /* SetupDocumentFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4CF182251C9D5000F14CB6 /* SetupDocumentFieldView.swift */; };
 		BD4CF188251CADEB00F14CB6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4CF187251CADEB00F14CB6 /* Extensions.swift */; };
 		BD4D7ACE25288F9C008AE755 /* DetailedLoadedDocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */; };
+		BD5CFF082542B28A00FFC523 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5CFF072542B28A00FFC523 /* ActivityViewController.swift */; };
 		BD72F14D25273CF700F5FA66 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = BD72F14C25273CF700F5FA66 /* CodeScanner */; };
 		BD78BF5D251C9A28000996B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78BF5C251C9A28000996B2 /* AppDelegate.swift */; };
 		BD78BF5F251C9A28000996B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78BF5E251C9A28000996B2 /* SceneDelegate.swift */; };
@@ -79,6 +80,7 @@
 		BD4CF182251C9D5000F14CB6 /* SetupDocumentFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupDocumentFieldView.swift; sourceTree = "<group>"; };
 		BD4CF187251CADEB00F14CB6 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedLoadedDocumentModel.swift; sourceTree = "<group>"; };
+		BD5CFF072542B28A00FFC523 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		BD78BF59251C9A28000996B2 /* document.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = document.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD78BF5C251C9A28000996B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD78BF5E251C9A28000996B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				BD4AE7B325260BD000700001 /* DocumentPicker.swift */,
 				BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */,
 				BDF3CE15253081BC004F63AE /* PersonalDataView.swift */,
+				BD5CFF072542B28A00FFC523 /* ActivityViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				BD78BF91251C9A8E000996B2 /* DocumentModel.swift in Sources */,
 				BD78BF61251C9A28000996B2 /* ContentView.swift in Sources */,
 				BD4AE7B425260BD000700001 /* DocumentPicker.swift in Sources */,
+				BD5CFF082542B28A00FFC523 /* ActivityViewController.swift in Sources */,
 				BD4D7ACE25288F9C008AE755 /* DetailedLoadedDocumentModel.swift in Sources */,
 				BD4CF16B251C9CD500F14CB6 /* DocumentListItem.swift in Sources */,
 			);

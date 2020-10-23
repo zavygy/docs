@@ -31,7 +31,7 @@ struct ContentView: View {
                     List {
                         Section(header: Text("Downloaded")) {
                             ForEach(globalEnviroment.loadedDocuments, id: \.cdID) { document in
-                                NavigationLink(destination: DetailedLoadedDocumentModel(globalEnviroment: globalEnviroment, document: document)) {
+                                NavigationLink(destination: DetailedLoadedDocumentModel(globalEnviroment: globalEnviroment, document: document, completeArray: arrayStringOf(document.fieldsToFill.count))) {
                                     DocumentListItem(documentModel: document)
                                 }
                             }.onDelete { indexSet in
@@ -226,6 +226,14 @@ struct ContentView: View {
             }
         }
 
+    }
+    
+    func arrayStringOf(_ size: Int) -> [String]{
+        var array: [String] = []
+        for i in 0..<size {
+            array.append("")
+        }
+        return array
     }
     
     func removeItemCreated(at offsets: IndexSet) {

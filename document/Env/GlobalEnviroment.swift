@@ -116,6 +116,82 @@ class GlobalEnviroment: ObservableObject {
         }
     }
     
+    func addOverlay(docModel: DocumentModel) -> String {
+
+        guard let originalDocument = CGPDFDocument(URL(string: docModel.url!) as! CFURL) else {
+            print("Here we go again")
+            return ""
+        }
+
+        let fileName = "\(docModel.name).pdf"
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0] as! NSString
+        let pathForPDF = documentsDirectory.appending("/" + fileName)
+       
+        let pageSize = originalDocument.page(at: 1)!.getBoxRect(.mediaBox)
+
+        UIGraphicsPDFRenderer(bounds: pageSize)
+        
+        UIGraphicsBeginPDFContextToFile(pathForPDF, CGRect.zero, nil)
+
+        guard let pdfContext = UIGraphicsGetCurrentContext() else {
+            print("Unable to access PDF Context.")
+            return ""
+        }
+    
+        UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: pageSize.width, height: pageSize.height), nil)
+        
+        for pageIndex in 0..<originalDocument.numberOfPages {
+            pdfContext.beginPDFPage(nil)
+
+            guard let currentPage = originalDocument.page(at: pageIndex + 1) else {
+                return ""
+            }
+
+            pdfContext.translateBy(x: 0, y: pageSize.height)
+            pdfContext.scaleBy(x: 1, y: -1)
+            pdfContext.drawPDFPage(currentPage)
+
+            pdfContext.saveGState()
+
+            pdfContext.translateBy(x: 0, y: pageSize.height)
+            pdfContext.scaleBy(x: 1, y: -1)
+            
+            for field in docModel.fieldsToFill {
+                let pos = CGRect(x: field.rect.origin.x, y: pageSize.height - field.rect.height - field.rect.origin.y, width: field.rect.width, height: field.rect.height)
+                var label = UILabel()
+//
+//                for pInfo in personalData {
+//                    if (pInfo.type == field.type) {
+//                        label.text = pInfo.info
+//                    }
+//                }
+                label.text = field.fillWith ?? ""
+                label.frame = field.rect
+                label.clipsToBounds = true
+                label.adjustsFontSizeToFitWidth = true
+                print(field.rect.origin.x)
+                print(field.rect.origin.y)
+                
+                label.drawText(in: pos)
+            }
+            
+          
+            pdfContext.restoreGState()
+
+            pdfContext.endPDFPage()
+        }
+        UIGraphicsEndPDFContext()
+        
+        
+        
+        let fileManager = FileManager.default
+        let documentoPath = documentsDirectory.appending("/" + fileName)
+        return documentoPath
+        
+
+    }
+    
     func appendField(docCDId: String, _ selection: PDFSelection, description: String, type: FieldType) {
         let newField = DocumentField(rect: selection.bounds(for: selection.pages[0]), string: description, type: type)
         print(newField.rect)
