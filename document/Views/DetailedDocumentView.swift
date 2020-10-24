@@ -35,7 +35,7 @@ struct DetailedDocumentView: View {
 
             .padding(.horizontal)
             if (pageState == 0) {
-                PDFRelay(globalEnviroment: globalEnviroment, document: document)
+                PDFRelay(globalEnviroment: globalEnviroment, document: document, addFieldAbility: true)
                     .background(Color(UIColor.systemBackground))
                     
             } else {

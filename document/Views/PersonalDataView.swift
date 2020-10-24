@@ -15,14 +15,7 @@ struct PersonalDataView: View {
     var stringTypes = ["Имя", "Фамилия", "ФИО", "Адрес", "Серия", "Номер", "Другое"]
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Your data")
-                    .font(.title)
-                    .padding(.top, 20)
-                    .padding(.leading, 20)
-                Spacer()
-            }
+        NavigationView {
                
             List {
                 Section {
@@ -37,7 +30,7 @@ struct PersonalDataView: View {
                 
                 Section {
                     VStack {
-                        TextField("Hello", text: $newText).padding(.horizontal)
+                        TextField("Data: ", text: $newText).padding(.horizontal)
                             .padding(.vertical, 4)
                         VStack {
                             Picker(selection: $selectedFieldType, label: Text("Strength")) {
@@ -61,8 +54,10 @@ struct PersonalDataView: View {
                     }
                 }
             }.listStyle(InsetGroupedListStyle())
+            .navigationTitle("Your data")
         }
     }
+    
     
     func createNew() {
         let model = TextPersonalInfo(newText, type: fieldTypeFromString(stringTypes[selectedFieldType]), createdAt: Date())

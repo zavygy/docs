@@ -17,7 +17,7 @@ struct DetailedLoadedDocumentModel: View {
     @State var completeArray: [String] = []
     @State var fillWith: String = ""
     var body: some View {
-        ZStack {
+        VStack {
             VStack {
                 HStack {
                     Spacer()
@@ -49,8 +49,9 @@ struct DetailedLoadedDocumentModel: View {
                     }
                     
                 } else {
-                    PDFRelay(globalEnviroment: globalEnviroment, document: document)
+                    PDFRelay(globalEnviroment: globalEnviroment, document: document, addFieldAbility: false)
                         .background(Color(UIColor.systemBackground)).clipped()
+//                        .padding(.bottom)
                 }
                 
                 
@@ -86,7 +87,7 @@ struct DetailedLoadedDocumentModel: View {
             })
             
             VStack {
-                Spacer()
+                
                 HStack {
                     Spacer()
                     Button(action: {
@@ -103,12 +104,12 @@ struct DetailedLoadedDocumentModel: View {
 //                        globalEnviroment.addOverlay(docModel: document)
                     
                     }) {
-                        Text("Autocomplete").padding(5)
+                        Text("Autocomplete")
                     }.background(Color(UIColor.systemBackground))
                     .cornerRadius(5)
                     Spacer()
                 }
-            }
+            }.padding(.vertical)
             
         }
     }

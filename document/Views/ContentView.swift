@@ -7,7 +7,8 @@
 
 import SwiftUI
 import CodeScanner
-import PartialSheet
+
+var statusBarHeight = UIApplication.shared.statusBarFrame.height
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -15,7 +16,6 @@ struct ContentView: View {
     @FetchRequest(fetchRequest: CDDocumentField.getAllCDFields()) var cdFields: FetchedResults<CDDocumentField>
     @FetchRequest(fetchRequest: CDPerData.getAllCDData()) var cdPerData: FetchedResults<CDPerData>
 
-    @EnvironmentObject var partialSheetManager: PartialSheetManager
     @ObservedObject var globalEnviroment: GlobalEnviroment
     @State private var createIsPresented: Bool = false
     @State private var typeInIsPresented: Bool = false
@@ -24,19 +24,149 @@ struct ContentView: View {
     @State private var downloadingDocument: Bool = false
     @State private var documentId: String = ""
     @State private var personalDataIsPresented: Bool = false
+    @State private var showDownloadOptions: Bool = true
+    @State private var myCreatedState: Bool = true
     
     var body: some View {
         NavigationView {
+            ZStack {
                 VStack {
-                    List {
-                        Section(header: Text("Downloaded")) {
-                            ForEach(globalEnviroment.loadedDocuments, id: \.cdID) { document in
-                                NavigationLink(destination: DetailedLoadedDocumentModel(globalEnviroment: globalEnviroment, document: document, completeArray: arrayStringOf(document.fieldsToFill.count))) {
-                                    DocumentListItem(documentModel: document)
+                    VStack {
+                        HStack {
+                            Text("Documents")
+                                .foregroundColor(.black)
+                                .font(.title)
+                                .bold()
+                                .padding(.leading, 24)
+                                .padding(.trailing, 8)
+                                
+                            
+                            Button(action: {
+                                DispatchQueue.main.async {
+                                    withAnimation {
+                                        showDownloadOptions.toggle()
+                                    }
                                 }
-                            }.onDelete { indexSet in
-                                    let delItem = globalEnviroment.loadedDocuments[indexSet.first!]
-                                    globalEnviroment.loadedDocuments.remove(at: indexSet.first!)
+                                
+                            }) {
+                                Image(showDownloadOptions ? "arrowUp" : "arrowDown")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 18, height: 6, alignment: .center)
+                                    .accentColor(.black)
+                            }
+                            
+                                
+                            Spacer()
+                            Button(action: {
+                                self.personalDataIsPresented = true
+                            }){
+                                Image(systemName: "person.crop.circle")
+                                    .resizable()
+                                    .accentColor(.black)
+                                    .frame(width: 24, height: 24)
+                                                  
+                            }.padding(.trailing, 24)
+                        }.padding(.top, 40 + statusBarHeight)
+                        .padding(.bottom, showDownloadOptions ? 0 : 32)
+                        
+                        if (showDownloadOptions) {
+                        
+                        VStack {
+                            HStack {
+                                Text("Enter document id or scan QR")
+                                    .foregroundColor(.black)
+                                    .font(.footnote)
+                                Spacer()
+                            }
+                            HStack {
+                                TextField("ID", text: $documentId, onCommit: {
+                                    handleTypeIn()
+                                    UIApplication.shared.endEditing()
+                                })
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Color.white)
+                                .frame(height: 49)
+                                .cornerRadius(4.0)
+                                
+                                .padding(.trailing, 8)
+                                
+
+                                
+                                
+                                Button(action: scanQRDownloaded) {
+                                    Image(systemName: "qrcode")
+        //                                .frame(width: 24, height: 24)
+                                        .resizable()
+                                        .padding(13)
+                                        .accentColor(.black)
+                                }.frame(width: 49, height: 49)
+                                .background(Color.white)
+                                .clipped()
+                                .cornerRadius(4)
+                            }.frame(height: 49)
+                            .padding(.top, 8)
+                        }.padding(.top, 40)
+                        .padding(.horizontal, 24)
+                        
+                        Button(action: {
+                            handleTypeIn()
+                            UIApplication.shared.endEditing()
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Download")
+                                    .font(.headline)
+                                    .bold()
+                                    .accentColor(.white)
+                                    .padding(.vertical, 13)
+                                Spacer()
+                                
+                            }
+                            
+                        }
+                        .clipped()
+                        .background(Color(r: 17, g: 17, b: 17))
+                        .cornerRadius(4)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 8)
+                        .padding(.bottom, 40)
+                        }
+                                        
+                    }
+                    .navigationBarTitle("Home")
+                    .navigationBarHidden(true)
+                    .background(Color(r: 255, g: 206, b: 0))
+                    .cornerRadius(16, corners: [.bottomRight, .bottomLeft])
+                    
+                    HStack {
+                        HomeSegmentedControl(myCreatedState: $myCreatedState)
+//                                .background(Color(r: 247, g: 247, b: 247))
+                            .cornerRadius(4)
+                        Spacer()
+                    }.padding(.top, 12)
+                    .padding(.leading, 24)
+                    
+                    ScrollView {
+                        
+                        
+                       
+                        if myCreatedState {
+                        
+                        ForEach(globalEnviroment.loadedDocuments, id: \.cdID) { document in
+                            NavigationLink(destination: DetailedLoadedDocumentModel(globalEnviroment: globalEnviroment, document: document, completeArray: arrayStringOf(document.fieldsToFill.count))) {
+                                DownloadedDocumentItem(documentModel: document, onDelete: {
+                                    let delItem = document
+                                    for i in 0..<globalEnviroment.loadedDocuments.count {
+                                        if (globalEnviroment.loadedDocuments[i].cdID == document.cdID) {
+                                            withAnimation(.easeOut) {
+                                                globalEnviroment.loadedDocuments.remove(at: i)
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    
                                     for i in 0..<cdDocuments.count {
                                         let m = cdDocuments[i]
                                         if (m.cdId! == delItem.cdID) {
@@ -45,176 +175,158 @@ struct ContentView: View {
                                                 try self.managedObjectContext.save()
                                             } catch {
                                                 print(error)
-                                                
                                             }
                                             break
                                         }
                                     }
-                                    
-                                    
                                     for i in 0..<cdFields.count {
                                         if (cdFields[i].parent! == delItem.cdID) {
                                             self.managedObjectContext.delete(cdFields[i])
-                                            
                                         }
                                     }
                                     
-                                do {
-                                    try self.managedObjectContext.save()
-                                } catch {
-                                    print(error)
-                                }
-                                    
-                            }
-                           
-                            if (typeInIsPresented == true) {
-
-                                TextField("ID: ", text: $documentId, onCommit:  {
-                                    handleTypeIn()
-                                    UIApplication.shared.endEditing()
+                                    do {
+                                        try self.managedObjectContext.save()
+                                    } catch {
+                                        print(error)
+                                    }
+                                    print("\(document.name)")
                                 })
-                                .padding(.horizontal)
-
-                            }
+                                    .background(Color(UIColor.systemBackground))
+                                    .clipped()
+                                    .cornerRadius(4)
+                                    .padding(.horizontal, 24) //bycicle
+                                    .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 5, x: 0, y: 0)
+                                    
+                            }.buttonStyle(PlainButtonStyle())
                                 
+                        }.padding(.top, 16)
+//                        .padding(.bottom, 60)
                             
-                            VStack {
-                                if downloadOptionsIsPresented == true {
-                                    HStack {
-                                        HStack {
-                                            Button(action: typeDownloaded) {
-                                                VStack {
-                                                    Image(systemName: "pencil.and.ellipsis.rectangle").frame(width: 25, height: 25)
-                                                    Text("Type")
-                                                }
-                                            }
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                            .buttonStyle(PlainButtonStyle())
-                                            
-                                        }
-                                        Divider().background(Color.secondary)
-                                        HStack {
-                                            Button(action: scanQRDownloaded) {
-                                                VStack {
-                                                    Image(systemName: "qrcode.viewfinder").frame(width: 25, height: 25)
-                                                    Text("Scan")
-                                                }
-                                            
-                                            }
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                            .buttonStyle(PlainButtonStyle())
-                                            
-                                        }
-                                    }
-                                } else {
-                                    Button (action: addDownloaded, label: {
-                                        HStack {
-                                            Spacer()
-                                            Text("+").font(.title3)
-                                            Spacer()
-                                        }
-                                    })
-                                }
-                                
-                            }
-                        }.cornerRadius(10.0)
-//                        .padding(.horizontal, 5)
+                        } else {
                         
-                        
-                        Section(header: Text("Created")) {
                             ForEach(globalEnviroment.createdDocuments, id: \.cdID) { document in
                                 NavigationLink(destination: DetailedDocumentView(managedObjectContext: managedObjectContext, cdDocuments: cdDocuments, cdFields: cdFields,  globalEnviroment: globalEnviroment, document: document)) {
-                                    DocumentListItem(documentModel: document)
-                                }
-                            }.onDelete { indexSet in
-                                let delItem = globalEnviroment.createdDocuments[indexSet.first!]
-                                globalEnviroment.createdDocuments.remove(at: indexSet.first!)
-
-                                for i in 0..<cdDocuments.count {
-                                    let m = cdDocuments[i]
-                                    if (m.cdId! == delItem.cdID) {
-                                        self.managedObjectContext.delete(cdDocuments[i])
+                                    DownloadedDocumentItem(documentModel: document, onDelete: {
+                                        let delItem = document
+                                        for i in 0..<globalEnviroment.createdDocuments.count {
+                                            if (globalEnviroment.createdDocuments[i].cdID == document.cdID) {
+                                                withAnimation(.easeOut) {
+                                                    globalEnviroment.createdDocuments.remove(at: i)
+                                                }
+                                                break;
+                                            }
+                                        }
+        
+                                        for i in 0..<cdDocuments.count {
+                                            let m = cdDocuments[i]
+                                            if (m.cdId! == delItem.cdID) {
+                                                self.managedObjectContext.delete(cdDocuments[i])
+                                                do {
+                                                    try self.managedObjectContext.save()
+                                                } catch {
+                                                    print(error)
+                                                }
+                                                break
+                                            }
+                                        }
+        
+        
+                                        for i in 0..<cdFields.count {
+                                            if (cdFields[i].parent! == delItem.cdID) {
+                                                self.managedObjectContext.delete(cdFields[i])
+                                            }
+                                        }
+                                        
                                         do {
                                             try self.managedObjectContext.save()
                                         } catch {
                                             print(error)
                                         }
-                                        break
-                                    }
-                                }
-                                
-
-                                for i in 0..<cdFields.count {
-                                    if (cdFields[i].parent! == delItem.cdID) {
-                                        self.managedObjectContext.delete(cdFields[i])
-                                        do {
-                                            try self.managedObjectContext.save()
-                                        } catch {
-                                            print(error)
-                                        }
-                                    }
-                                }
-//
-                                
+                                        
+                                        
+                                        print("\(document.name)")
+                                    })
+                                        .background(Color(UIColor.systemBackground))
+                                        .clipped()
+                                        .cornerRadius(4)
+                                        .padding(.horizontal, 24)
+                                        .padding(.top, 16)//bycicle
+                                        .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 5, x: 0, y: 0)
+                                }.buttonStyle(PlainButtonStyle())
                             }
-                            Button (action: addCreated, label: {
-                                HStack {
-                                    Spacer()
-                                    Text("+").font(.title3)
+                        }
+                        
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(height: 100)
+                        
+                    }
+                    Text("").frame(width: 0, height: 0, alignment: .bottom)
+                        .sheet(isPresented: $createIsPresented, content: {
+                            CreateDocumentView(globalEnviroment: globalEnviroment, presentSelf: $createIsPresented)
+                                .ignoresSafeArea()
+                        })
+                    Text("").frame(width: 0, height: 0, alignment: .bottom)
+                        .sheet(isPresented: $personalDataIsPresented, onDismiss: {
+                            self.personalDataIsPresented = false
+
+                        } ,content: {
+                            PersonalDataView(managedObjectContext: self.managedObjectContext, globalEnviroment: globalEnviroment)
+                        })
+                    Text("").frame(width: 0, height: 0, alignment: .bottom)
+                        .sheet(isPresented: $qrScanIsPresented, onDismiss: {
+                            withAnimation {
+                                qrScanIsPresented = false
+                                downloadOptionsIsPresented = false
+                            }
+                        }, content: {
+                            ZStack {
+                                CodeScannerView(codeTypes: [.qr], completion: self.handleScan).ignoresSafeArea()
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        Button(action: {
+                                            self.qrScanIsPresented = false
+                                            self.downloadOptionsIsPresented = false
+                                        }) {
+                                            Image(systemName: "multiply.circle.fill")
+                                                .resizable()
+                                                .foregroundColor(Color(UIColor.systemGray2))
+                                                .opacity(0.85)
+                                                .frame(width: 30, height: 30)
+                                            }.padding(.horizontal, 15)
+                                    }.padding(.top, 15)
                                     Spacer()
                                 }
-                            }).sheet(isPresented: $createIsPresented, content: {
-                                CreateDocumentView(globalEnviroment: globalEnviroment, presentSelf: $createIsPresented)
-                                    .ignoresSafeArea()
-                            })
-                            
-                            
-                        }.cornerRadius(10.0)
-//
-                        
-                    }.listStyle(InsetGroupedListStyle())
-                    .sheet(isPresented: $qrScanIsPresented, onDismiss: {
-                        withAnimation {
-                            qrScanIsPresented = false
-                            downloadOptionsIsPresented = false
-                        }
-                    }, content: {
-                        ZStack {
-                            CodeScannerView(codeTypes: [.qr], completion: self.handleScan).ignoresSafeArea()
-                            VStack {
-                                HStack {
-                                    Spacer()
-                                    Button(action: {
-                                        self.qrScanIsPresented = false
-                                        self.downloadOptionsIsPresented = false
-                                    }) {
-                                        Image(systemName: "multiply.circle.fill")
-                                            .resizable()
-                                            .foregroundColor(Color(UIColor.systemGray2))
-                                            .opacity(0.85)
-                                            .frame(width: 30, height: 30)
-                                    }.padding(.horizontal, 15)
-                                }.padding(.top, 15)
+                            }
+                    })
+
+                    
+                }.ignoresSafeArea(.all, edges: .top)
+                
+                VStack {
+                    Spacer()
+                    HStack {
+                        Button(action: addCreated) {
+                            HStack {
+                                Spacer()
+                                Text("Create new document")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                    .padding()
                                 Spacer()
                             }
                         }
-                    })
-                    .navigationViewStyle(StackNavigationViewStyle())
-                    .navigationBarTitle("Documents")
-                    .sheet(isPresented: $personalDataIsPresented, onDismiss: {
-                        self.personalDataIsPresented = false
-//                        self.globalEnviroment.savePersonalData()
-
-                    } ,content: {
-                        PersonalDataView(managedObjectContext: self.managedObjectContext, globalEnviroment: globalEnviroment)
-                                            })
-                    .navigationBarItems(trailing: Button(action: {
-                        self.personalDataIsPresented = true
-                    }){
-                        Image(systemName: "person.crop.circle").imageScale(.large)
-                    })
-                    
+                        .background(Color(r: 240, g: 240, b: 240))
+                        .cornerRadius(4)
+                        .padding(.top, 20)
+                        .padding(.bottom, 40)
+//                        .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 5, x: 0, y: 0)
+                    }.padding(.horizontal, 24)
                 }
+
+            }.ignoresSafeArea(.all, edges: [.top, .bottom])
                 
                 
         }.onAppear {
@@ -249,10 +361,11 @@ struct ContentView: View {
     }
 
     func scanQRDownloaded() {
+        qrScanIsPresented = true
+
         withAnimation {
             typeInIsPresented = false
         }
-        qrScanIsPresented = true
         
     }
 //    

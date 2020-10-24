@@ -1,5 +1,5 @@
 import SwiftUI
-import RealmSwift
+//import RealmSwift
 import Firebase
 import CoreData
 import PDFKit
@@ -17,7 +17,6 @@ class GlobalEnviroment: ObservableObject {
     init() {
         dbReference = Database.database().reference()
         let ud = UserDefaults.standard
-        
         let decoded = ud.data(forKey: "personalData")
         do {
             try personalData = NSKeyedUnarchiver.unarchivedObject(ofClasses: [TextPersonalInfo.self], from: decoded ?? Data()) as! [TextPersonalInfo]
@@ -85,7 +84,9 @@ class GlobalEnviroment: ObservableObject {
                             print(error)
                         }
                     }
-                    self.loadedDocuments.append(document)
+                    withAnimation {
+                        self.loadedDocuments.append(document)
+                    }
 
                    
                 }

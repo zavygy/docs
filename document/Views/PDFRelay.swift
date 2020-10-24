@@ -15,6 +15,7 @@ struct PDFRelay: View {
     @State var shouldShowAddFieldButton: Bool = false
     @State var sheetIsPresented: Bool = false
     @State var fieldDescription: String = ""
+    @State var addFieldAbility: Bool
 
     var body: some View {
         ZStack {
@@ -44,7 +45,7 @@ struct PDFRelay: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    if (pdfSelection != nil) {
+                    if (pdfSelection != nil && addFieldAbility) {
                         AddFieldButton(sheetIsPresented: $sheetIsPresented)
                             .padding()
                             .shadow(radius: 10)

@@ -7,17 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1B0C6C49-E712-4994-ACE8-137F942FA37E"
+            uuid = "55CDAD62-47E5-4362-979A-4784505A4BAA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "document/Views/ContentView.swift"
+            filePath = "../Library/Developer/Xcode/DerivedData/document-aqezwfqnkqwsiwboqutpomhjjqmw/SourcePackages/checkouts/CodeScanner/Sources/CodeScanner/CodeScanner.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "ContentView"
-            landmarkType = "14">
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "init(parent:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "038FB692-6C84-41CE-9EFF-A27F7D0C48E9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Library/Developer/Xcode/DerivedData/document-aqezwfqnkqwsiwboqutpomhjjqmw/SourcePackages/checkouts/CodeScanner/Sources/CodeScanner/CodeScanner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "loadView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9CEA8C74-48EF-40F9-BB5F-BE1D24199356"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Library/Developer/Xcode/DerivedData/document-aqezwfqnkqwsiwboqutpomhjjqmw/SourcePackages/checkouts/CodeScanner/Sources/CodeScanner/CodeScanner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "loadView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3669E4D0-77D4-4566-A8CE-BFBF6E23DE5F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Library/Developer/Xcode/DerivedData/document-aqezwfqnkqwsiwboqutpomhjjqmw/SourcePackages/checkouts/CodeScanner/Sources/CodeScanner/CodeScanner.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "loadView()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

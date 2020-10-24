@@ -6,8 +6,8 @@ target 'document' do
   use_frameworks!
 
   # Pods for document
-  pod 'Realm'
-  pod 'RealmSwift'
+  # pod 'Realm'
+  # pod 'RealmSwift'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   target 'documentTests' do

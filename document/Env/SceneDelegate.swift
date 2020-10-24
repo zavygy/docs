@@ -8,13 +8,13 @@
 import UIKit
 import SwiftUI
 import CoreData
-import PartialSheet
+//import PartialSheet
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    let sheetManager: PartialSheetManager = PartialSheetManager()
+//    let sheetManager: PartialSheetManager = PartialSheetManager()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -36,7 +36,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        
+//        setupAppearance()
     }
+    
+    
+    fileprivate func setupAppearance() {
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().backgroundColor = .clear
+        
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : ]
+    }
+
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

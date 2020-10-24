@@ -36,6 +36,9 @@
 		BDAE77582525F1E2005E8725 /* SharedResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAE77572525F1E2005E8725 /* SharedResultView.swift */; };
 		BDB93D5F251DF57A00A9A63B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDB93D5E251DF57A00A9A63B /* GoogleService-Info.plist */; };
 		BDD33F5C25275DB2001CC6F3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = BDD33F5B25275DB2001CC6F3 /* PartialSheet */; };
+		BDDF4054254356000078C9DE /* DownloadedDocumentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF4053254356000078C9DE /* DownloadedDocumentItem.swift */; };
+		BDDF405C25437F550078C9DE /* HomeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF405B25437F550078C9DE /* HomeSegmentedControl.swift */; };
+		BDF306A625432C58005E2883 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF306A525432C58005E2883 /* HeaderView.swift */; };
 		BDF3CE16253081BC004F63AE /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF3CE15253081BC004F63AE /* PersonalDataView.swift */; };
 		C08C79E2F9B641629BAF8345 /* Pods_documentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9521528DC1F2A9B99CF94850 /* Pods_documentTests.framework */; };
 /* End PBXBuildFile section */
@@ -98,6 +101,9 @@
 		BD78BF90251C9A8E000996B2 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		BDAE77572525F1E2005E8725 /* SharedResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResultView.swift; sourceTree = "<group>"; };
 		BDB93D5E251DF57A00A9A63B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDDF4053254356000078C9DE /* DownloadedDocumentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedDocumentItem.swift; sourceTree = "<group>"; };
+		BDDF405B25437F550078C9DE /* HomeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedControl.swift; sourceTree = "<group>"; };
+		BDF306A525432C58005E2883 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		BDF3CE15253081BC004F63AE /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
 		BF3D622FFEC439F40D87D7B3 /* Pods-document-documentUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-document-documentUITests.release.xcconfig"; path = "Target Support Files/Pods-document-documentUITests/Pods-document-documentUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +153,7 @@
 		BD4CF161251C9C9E00F14CB6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BDF306A425432C47005E2883 /* Design */,
 				BD4CF162251C9CBB00F14CB6 /* PDFKitView.swift */,
 				BD78BF60251C9A28000996B2 /* ContentView.swift */,
 				BD4CF16A251C9CD500F14CB6 /* DocumentListItem.swift */,
@@ -235,6 +242,16 @@
 				BD78BF90251C9A8E000996B2 /* DocumentModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BDF306A425432C47005E2883 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				BDF306A525432C58005E2883 /* HeaderView.swift */,
+				BDDF4053254356000078C9DE /* DownloadedDocumentItem.swift */,
+				BDDF405B25437F550078C9DE /* HomeSegmentedControl.swift */,
+			);
+			path = Design;
 			sourceTree = "<group>";
 		};
 		D5604442D8D1426EB46AB9F7 /* Frameworks */ = {
@@ -521,10 +538,13 @@
 				BD4CF170251C9D0100F14CB6 /* DetailedDocumentView.swift in Sources */,
 				BD4CF188251CADEB00F14CB6 /* Extensions.swift in Sources */,
 				BD78BF5F251C9A28000996B2 /* SceneDelegate.swift in Sources */,
+				BDDF405C25437F550078C9DE /* HomeSegmentedControl.swift in Sources */,
 				BD78BF91251C9A8E000996B2 /* DocumentModel.swift in Sources */,
 				BD78BF61251C9A28000996B2 /* ContentView.swift in Sources */,
+				BDF306A625432C58005E2883 /* HeaderView.swift in Sources */,
 				BD4AE7B425260BD000700001 /* DocumentPicker.swift in Sources */,
 				BD5CFF082542B28A00FFC523 /* ActivityViewController.swift in Sources */,
+				BDDF4054254356000078C9DE /* DownloadedDocumentItem.swift in Sources */,
 				BD4D7ACE25288F9C008AE755 /* DetailedLoadedDocumentModel.swift in Sources */,
 				BD4CF16B251C9CD500F14CB6 /* DocumentListItem.swift in Sources */,
 			);
@@ -697,12 +717,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = document/document.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"document/Preview Content\"";
 				DEVELOPMENT_TEAM = TPM5Z76U49;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = document/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -722,12 +742,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = document/document.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"document/Preview Content\"";
 				DEVELOPMENT_TEAM = TPM5Z76U49;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = document/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
