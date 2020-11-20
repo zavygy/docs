@@ -12,37 +12,31 @@ struct DownloadedDocumentItem: View {
     let onDelete: () -> ()
     var body: some View {
         VStack {
-            HStack {
-                Text(documentModel.id)
-                    .lineLimit(1)
-                    .font(.footnote)
-                    .accentColor(.primary)
-//                    .bold()
-//                    .italic()
-                Spacer()
-            }.padding(.horizontal, 16)
-            .padding(.top, 16)
+            
             HStack {
                 Text(documentModel.name)
-                    .font(.headline)
+                    .fontWeight(.medium)
                     .bold()
                     .accentColor(.primary)
 
                 Spacer()
             }.padding(.horizontal, 16)
-            .padding(.top, 10)
+            .padding(.top, 16)
             HStack {
-                Text("\(documentModel.fieldsToFill.count) fields")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
+                VStack {
+                    Text("\(documentModel.fieldsToFill.count) fields")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                        .lineLimit(/*@START_MENU_TOKEN@*/2/*@END_MENU_TOKEN@*/)
+                }
                 Spacer()
                 
                 Button(action: onDelete) {
                     Image(systemName: "trash")
-                        .foregroundColor(.primary)
+                        .accentColor(.primary)
                 }
             }.padding(.horizontal, 16)
-            .padding(.top, 10)
+            .padding(.top, 4)
             .padding(.bottom, 15)
             
             

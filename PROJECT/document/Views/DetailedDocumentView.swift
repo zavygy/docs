@@ -10,6 +10,8 @@ import CoreData
 import PDFKit
 
 struct DetailedDocumentView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
     var managedObjectContext: NSManagedObjectContext
     var cdDocuments: FetchedResults<CDDocumentModel>
     var cdFields: FetchedResults<CDDocumentField>
@@ -22,12 +24,60 @@ struct DetailedDocumentView: View {
     @State private var sharedPresentMode: Bool = false
     
     var body: some View {
+        
         VStack {
+            
+            HStack {
+                Button(action:{
+                    withAnimation {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                }){
+                    HStack(spacing: 8) {
+                        Image(systemName: "chevron.left")
+                            .renderingMode(.original)
+                            .font(.body)
+                            .accentColor(.primary)
+                        Text("Back")
+                            .foregroundColor(.primary)
+                            .fontWeight(.medium)
+//                            .padding(.trailing, 2)
+                    }.padding(.horizontal)
+                    .padding(.vertical, 2)
+                    
+                }
+//                .background(Color(r: 255, g: 193, b: 87))
+                .cornerRadius(4)
+                Spacer()
+                
+                Button(action: shareDocument){
+                    HStack(spacing: 8) {
+                        Text("Share")
+                            .foregroundColor(.primary)
+                            .fontWeight(.medium)
+//                            .padding(.trailing, 2)
+                    }.padding(.horizontal)
+                    .padding(.vertical, 2)
+                    
+                }
+//                .background(Color(r: 255, g: 193, b: 87))
+                .cornerRadius(4)
+                
+            }.padding(.top)
+            
+            
+            HStack {
+                Text("\(document.name)")
+                    .font(.title)
+                    .bold()
+                Spacer()
+            }.padding(.horizontal, 24)
+            
             Picker(selection: $pageState, label: Text("")) {
                 Text("PDF").tag(0)
                 Text("Fields").tag(1)
             }.pickerStyle(SegmentedPickerStyle())
-            .navigationBarTitle(document.name)
+            .navigationBarHidden(true)
             .navigationBarItems(trailing: Button("Share", action: shareDocument))
             .sheet(isPresented: $sharedPresentMode, content: {
                 SharedResultView(docId: document.id, documentTitle: document.name)

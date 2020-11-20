@@ -19,7 +19,9 @@ struct PDFKitView: UIViewRepresentable {
         }
         addObservers()
         pdfView.delegate = nil
+        pdfView.backgroundColor = UIColor(Color.white)
         return pdfView
+        
     }
     
     func updateUIView(_ uiView: UIView, context: Context) {
@@ -27,11 +29,13 @@ struct PDFKitView: UIViewRepresentable {
     }
     
     func addObservers() {
-        if (pdfView.observationInfo != nil) {
-            NotificationCenter.default.removeObserver(pdfView)
+        DispatchQueue.main.async {
+            if (pdfView.observationInfo != nil) {
+                NotificationCenter.default.removeObserver(pdfView)
+            }
+            
+            NotificationCenter.default.addObserver(forName: .PDFViewSelectionChanged, object: pdfView, queue: nil, using: self.selectionChanged)
         }
-        
-        NotificationCenter.default.addObserver(forName: .PDFViewSelectionChanged, object: pdfView, queue: nil, using: self.selectionChanged)
     }
     
     func selectionChanged(_ notification: Notification) {

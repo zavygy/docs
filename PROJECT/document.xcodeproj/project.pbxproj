@@ -35,6 +35,7 @@
 		BD78BF91251C9A8E000996B2 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD78BF90251C9A8E000996B2 /* DocumentModel.swift */; };
 		BDAE77582525F1E2005E8725 /* SharedResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAE77572525F1E2005E8725 /* SharedResultView.swift */; };
 		BDB93D5F251DF57A00A9A63B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BDB93D5E251DF57A00A9A63B /* GoogleService-Info.plist */; };
+		BDC56241256671680056C109 /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC56240256671680056C109 /* CustomPickerView.swift */; };
 		BDD33F5C25275DB2001CC6F3 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = BDD33F5B25275DB2001CC6F3 /* PartialSheet */; };
 		BDDF4054254356000078C9DE /* DownloadedDocumentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF4053254356000078C9DE /* DownloadedDocumentItem.swift */; };
 		BDDF405C25437F550078C9DE /* HomeSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDF405B25437F550078C9DE /* HomeSegmentedControl.swift */; };
@@ -101,6 +102,7 @@
 		BD78BF90251C9A8E000996B2 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
 		BDAE77572525F1E2005E8725 /* SharedResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResultView.swift; sourceTree = "<group>"; };
 		BDB93D5E251DF57A00A9A63B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BDC56240256671680056C109 /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		BDDF4053254356000078C9DE /* DownloadedDocumentItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadedDocumentItem.swift; sourceTree = "<group>"; };
 		BDDF405B25437F550078C9DE /* HomeSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedControl.swift; sourceTree = "<group>"; };
 		BDF306A525432C58005E2883 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -154,17 +156,17 @@
 			isa = PBXGroup;
 			children = (
 				BDF306A425432C47005E2883 /* Design */,
-				BD4CF162251C9CBB00F14CB6 /* PDFKitView.swift */,
 				BD78BF60251C9A28000996B2 /* ContentView.swift */,
-				BD4CF16A251C9CD500F14CB6 /* DocumentListItem.swift */,
 				BD4CF16F251C9D0100F14CB6 /* DetailedDocumentView.swift */,
+				BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */,
 				BD4CF174251C9D1400F14CB6 /* AddDocumentButton.swift */,
+				BD4CF162251C9CBB00F14CB6 /* PDFKitView.swift */,
+				BD4CF16A251C9CD500F14CB6 /* DocumentListItem.swift */,
 				BD4CF17A251C9D3300F14CB6 /* PDFRelay.swift */,
 				BD4CF182251C9D5000F14CB6 /* SetupDocumentFieldView.swift */,
 				BDAE77572525F1E2005E8725 /* SharedResultView.swift */,
 				BD4AE7AE2526058B00700001 /* CreateDocumentView.swift */,
 				BD4AE7B325260BD000700001 /* DocumentPicker.swift */,
-				BD4D7ACD25288F9C008AE755 /* DetailedLoadedDocumentModel.swift */,
 				BDF3CE15253081BC004F63AE /* PersonalDataView.swift */,
 				BD5CFF072542B28A00FFC523 /* ActivityViewController.swift */,
 			);
@@ -250,6 +252,7 @@
 				BDF306A525432C58005E2883 /* HeaderView.swift */,
 				BDDF4053254356000078C9DE /* DownloadedDocumentItem.swift */,
 				BDDF405B25437F550078C9DE /* HomeSegmentedControl.swift */,
+				BDC56240256671680056C109 /* CustomPickerView.swift */,
 			);
 			path = Design;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 				BD4CF175251C9D1400F14CB6 /* AddDocumentButton.swift in Sources */,
 				BD4CF163251C9CBB00F14CB6 /* PDFKitView.swift in Sources */,
 				BD4CF15D251C9C7B00F14CB6 /* GlobalEnviroment.swift in Sources */,
+				BDC56241256671680056C109 /* CustomPickerView.swift in Sources */,
 				BD031FEA25279029005CDF26 /* CDDocument.xcdatamodeld in Sources */,
 				BD78BF5D251C9A28000996B2 /* AppDelegate.swift in Sources */,
 				BDAE77582525F1E2005E8725 /* SharedResultView.swift in Sources */,
@@ -717,7 +721,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = document/document.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"document/Preview Content\"";
 				DEVELOPMENT_TEAM = TPM5Z76U49;
 				ENABLE_PREVIEWS = YES;
@@ -742,7 +746,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = document/document.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"document/Preview Content\"";
 				DEVELOPMENT_TEAM = TPM5Z76U49;
 				ENABLE_PREVIEWS = YES;

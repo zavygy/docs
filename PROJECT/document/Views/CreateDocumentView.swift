@@ -23,93 +23,105 @@ struct CreateDocumentView: View {
         VStack {
             
             HStack {
-                VStack {
-                    TextField("Name", text: $documentName, onCommit: {
-                        UIApplication.shared.endEditing()
-                    })
-                        .foregroundColor(.primary)
-                        .font(Font.title3.bold())
-                        .lineLimit(1)
-                        .frame(height: 49)
-                        .cornerRadius(4.0)
-                }.padding(.leading, 23.5)
-                .padding(.trailing, 60)
-                
-                    
                 Spacer()
-                Button(action: {}) {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .scaledToFit()
-                        .font(Font.title.weight(.bold))
-                        .frame(width: 16, height: 16, alignment: .center)
-                        .foregroundColor(.primary)
+                Button(action: {
+                    self.presentSelf = false
+                }) {
+                    HStack(spacing: 8) {
+                        Text("Close")
+                            .foregroundColor(.primary)
+                            .fontWeight(.medium)
+    //                            .padding(.trailing, 2)
+                    }.padding(.horizontal)
+                    .padding(.vertical, 2)
                 }
-                .padding(.trailing, 23.5)
-            }.padding(.top, 26)
+            }.padding(.top)
             
             VStack {
                 HStack {
-                    Text("Name:")
-                        .font(.headline)
-                        .foregroundColor(.primary)
+                    Text("Type document name")
+                        .font(.footnote)
                     Spacer()
-                }.padding(.top, 36)
-                
-                
-            }.padding(.horizontal, 23.5)
+                }
+                TextField("...", text: $documentName, onCommit: {
+                    UIApplication.shared.endEditing()
+                })
+                    .foregroundColor(.primary)
+                    .font(Font.title.bold())
+                    .lineLimit(1)
+                    .frame(height: 49)
+                    .cornerRadius(4.0)
+                    
+            }.padding(.leading, 23.5)
+            .padding(.trailing, 60)
+            
+          
+            
            
-            
             VStack {
                 HStack {
+                   Text("Type document url")
+                    .font(.footnote)
                     Spacer()
-                    Picker(selection: $documentPickerMode, label: Text("")) {
-                        Text("URL").tag(1)
-                        Text("Document").tag(0)
-                    }.pickerStyle(SegmentedPickerStyle())
-                    Spacer()
-                }.padding(.horizontal)
-            
-                VStack {
-                    if (documentPickerMode == 1) {
-                        TextField("URL: ", text: $url).padding()
-                    } else {
-                        if (uplodingDocument) {
-                            HStack {
-                                Spacer()
-                                ProgressView("Uploading")
-                                Spacer()
-                            }.padding()
-                        } else {
-                            Button("Pick document", action: pickDocument).padding()
-                                .buttonStyle(PlainButtonStyle())
-                                
-                        }
-                    }
-                }
+                }.padding(.horizontal, 24)
+                TextField("URL: ", text: $url)
+                    .padding(.horizontal, 24)
             }
+                   
+            
+            Spacer()
             
             HStack {
-                Spacer()
-                Button("Create", action: create)
-                   
-                    .sheet(isPresented: $pickerIsPresented,content: {
-                        DocumentPicker(documentName: documentId, url: Binding(
-                            get: { self.url },
-                            set: { (newValue) in
-                                if (newValue != "") {
-                                    self.documentPickerMode = 1
-                                }
-                                self.url = newValue
-                                self.uplodingDocument = false
-                                   
-                                
-                            }), isDocPicked: $isDocPicked)
-                            .ignoresSafeArea()
-                    })
-                Spacer()
+                Button(action: pickDocument) {
+                    HStack {
+                        Spacer()
+                        Text("Choose document")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .padding()
+                        Spacer()
+                    }
+                }
+                .clipped()
+                .background(Color(r: 240, g: 240, b: 240))
+                .cornerRadius(8)
+                .padding(.top, 20)
+                .sheet(isPresented: $pickerIsPresented, content: {
+                    DocumentPicker(documentName: documentId, url: Binding(
+                        get: { self.url },
+                        set: { (newValue) in
+                            if (newValue != "") {
+                                self.documentPickerMode = 1
+                            }
+                            self.url = newValue
+                            self.uplodingDocument = false
+                               
+                            
+                        }), isDocPicked: $isDocPicked)
+                        .ignoresSafeArea()
+                })
+                
             }
-            Spacer()
+            .padding(.horizontal, 24)
+            
+            HStack {
+                Button(action: create) {
+                    HStack {
+                        Spacer()
+                        Text("Create")
+                            .font(.headline)
+                            .foregroundColor(.black)
+                            .padding()
+                        Spacer()
+                    }
+                }
+                .clipped()
+                .background(Color(r: 240, g: 240, b: 240))
+                .cornerRadius(8)
+                .padding(.top, 20)
+                .padding(.bottom, 40)
+            }
+            .padding(.horizontal, 24)
         
            
         }

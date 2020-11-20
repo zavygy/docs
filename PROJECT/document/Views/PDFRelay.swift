@@ -33,7 +33,8 @@ struct PDFRelay: View {
                                 shouldShowAddFieldButton = true
                             }
                         }
-                        )).sheet(isPresented: $sheetIsPresented){ SetupDocumentFieldView(globalEnviroment: globalEnviroment, documentModel: document, selection: pdfSelection, onDismiss: {
+                        )).background(Color.white)
+                .sheet(isPresented: $sheetIsPresented){ SetupDocumentFieldView(globalEnviroment: globalEnviroment, documentModel: document, selection: pdfSelection, onDismiss: {
                             self.sheetIsPresented = false
                             
                         }, fieldDescription: $fieldDescription)
@@ -44,14 +45,12 @@ struct PDFRelay: View {
             VStack {
                 Spacer()
                 HStack {
-                    Spacer()
                     if (pdfSelection != nil && addFieldAbility) {
                         AddFieldButton(sheetIsPresented: $sheetIsPresented)
-                            .padding()
+                            .padding(.horizontal, 24)
                             .shadow(radius: 10)
                             
                     }
-                    Spacer()
                 }
             }
         }
@@ -71,12 +70,21 @@ struct AddFieldButton: View {
         
     var body: some View {
         VStack {
-            Button(action: addField, label: {
-                Text("Add field")
-                    .foregroundColor(.primary)
-                    .padding()
-            }).background(Color(UIColor.systemGroupedBackground))
-        }.cornerRadius(10)
+            Button(action: addField) {
+                HStack {
+                    Spacer()
+                    Text("Add field")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                    Spacer()
+                }
+            }
+            .clipped()
+            .background(Color(r: 17, g: 17, b: 17))
+            .cornerRadius(8)
+            .padding(.top, 20)
+        }
         
        
        

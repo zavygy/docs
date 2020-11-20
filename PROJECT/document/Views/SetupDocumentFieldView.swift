@@ -19,26 +19,54 @@ struct SetupDocumentFieldView: View {
     
     var body: some View {
         VStack {
-            TextField("smth", text: $fieldDescription, onEditingChanged: { (changed) in
+            HStack {
+                Text("Type field description")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                Spacer()
+            }.padding(.horizontal, 24)
+            .padding(.top, 40)
+            
+            TextField("...", text: $fieldDescription, onEditingChanged: { (changed) in
                 print("Username onEditingChanged - \(changed)")
-            })
+            }).padding(.horizontal, 24)
+        
             Picker(selection: $selectedFieldType, label: Text("Strength")) {
                 ForEach(0 ..< stringTypes.count) {
                     Text(self.stringTypes[$0])
                 }
-            }
+            }.padding(.horizontal, 24)
             Spacer()
-            Button("Save", action: {
+            Button(action: {
                 print(fieldDescription)
                 globalEnviroment.appendField(docCDId: documentModel.cdID, selection!, description: fieldDescription, type: fieldTypeFromString(stringTypes[selectedFieldType]))
               
                 selection?.color = UIColor(.orange)
                 onDismiss()
                 fieldDescription = ""
-            })
-        }.padding()
+            }) {
+                VStack {
+                    
+                        HStack {
+                            Spacer()
+                            Text("Add field")
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .padding()
+                            Spacer()
+                        }
+                    
+                    
+            }
+        }
+            .clipped()
+            .background(Color(r: 240, g: 240, b: 240))
+            .cornerRadius(8)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 20)
         
       
     }
 }
 
+}

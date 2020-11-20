@@ -9,6 +9,9 @@ import SwiftUI
 import CodeScanner
 
 var statusBarHeight = UIApplication.shared.statusBarFrame.height
+let appColorFirst = Color(r: 249, g: 134, b: 10)
+let appColorSecond = Color(r: 188, g: 60, b: 60)
+let appItemBackground = Color(r: 246, g: 247, b: 251)
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -24,8 +27,8 @@ struct ContentView: View {
     @State private var downloadingDocument: Bool = false
     @State private var documentId: String = ""
     @State private var personalDataIsPresented: Bool = false
-    @State private var showDownloadOptions: Bool = true
-    @State private var myCreatedState: Bool = true
+    @State private var showDownloadOptions: Bool = false
+    @State private var homePageState: Bool = true
     
     var body: some View {
         NavigationView {
@@ -34,125 +37,116 @@ struct ContentView: View {
                     VStack {
                         HStack {
                             Text("Documents")
-                                .foregroundColor(.black)
+//                                .foregroundColor(appColorFirst)
                                 .font(.title)
                                 .bold()
                                 .padding(.leading, 24)
                                 .padding(.trailing, 8)
-                                
+                                .gradientForeground(colors: [appColorFirst!, appColorSecond!])
+
                             
-                            Button(action: {
-                                DispatchQueue.main.async {
-                                    withAnimation {
-                                        showDownloadOptions.toggle()
-                                    }
-                                }
-                                
-                            }) {
-                                Image(showDownloadOptions ? "arrowUp" : "arrowDown")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 18, height: 6, alignment: .center)
-                                    .accentColor(.black)
-                            }
-                            
-                                
+//                            Button(action: {
+//                                DispatchQueue.main.async {
+//                                    withAnimation {
+//                                        showDownloadOptions.toggle()
+//                                    }
+//                                }
+//
+//                            }) {
+//                                Image(showDownloadOptions ? "arrowUp" : "arrowDown")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 18, height: 6, alignment: .center)
+//                                    .foregroundColor(appColorFirst)
+//                            }
+//
                             Spacer()
+                            
                             Button(action: {
                                 self.personalDataIsPresented = true
                             }){
                                 Image(systemName: "person.crop.circle")
                                     .resizable()
-                                    .accentColor(.black)
+                                    .accentColor(.primary)
                                     .frame(width: 24, height: 24)
                                                   
-                            }.padding(.trailing, 24)
-                        }.padding(.top, 40 + statusBarHeight)
-                        .padding(.bottom, showDownloadOptions ? 0 : 32)
-                        
-                        if (showDownloadOptions) {
-                        
-                        VStack {
-                            HStack {
-                                Text("Enter document id or scan QR")
-                                    .foregroundColor(.black)
-                                    .font(.footnote)
-                                Spacer()
                             }
-                            HStack {
-                                TextField("ID", text: $documentId, onCommit: {
-                                    handleTypeIn()
-                                    UIApplication.shared.endEditing()
-                                })
-                                .foregroundColor(.black)
-                                .padding()
-                                .background(Color.white)
-                                .frame(height: 49)
-                                .cornerRadius(4.0)
-                                
-                                .padding(.trailing, 8)
-                                
-
-                                
-                                
-                                Button(action: scanQRDownloaded) {
-                                    Image(systemName: "qrcode")
-        //                                .frame(width: 24, height: 24)
-                                        .resizable()
-                                        .padding(13)
-                                        .accentColor(.black)
-                                }.frame(width: 49, height: 49)
-                                .background(Color.white)
-                                .clipped()
-                                .cornerRadius(4)
-                            }.frame(height: 49)
-                            .padding(.top, 8)
-                        }.padding(.top, 40)
-                        .padding(.horizontal, 24)
-                        
-                        Button(action: {
-                            handleTypeIn()
-                            UIApplication.shared.endEditing()
-                        }) {
-                            HStack {
-                                Spacer()
-                                Text("Download")
-                                    .font(.headline)
-                                    .bold()
-                                    .accentColor(.white)
-                                    .padding(.vertical, 13)
-                                Spacer()
-                                
-                            }
+                            .padding(.trailing, 24)
                             
-                        }
-                        .clipped()
-                        .background(Color(r: 17, g: 17, b: 17))
-                        .cornerRadius(4)
-                        .padding(.horizontal, 24)
-                        .padding(.top, 8)
-                        .padding(.bottom, 40)
-                        }
+                        }.padding(.top, 40 + statusBarHeight)
+//                        .padding(.bottom, showDownloadOptions ? 0 : 32)
+                        
+//                        if (showDownloadOptions) {
+//
+//
+//                        }
                                         
                     }
                     .navigationBarTitle("Home")
                     .navigationBarHidden(true)
-                    .background(Color(r: 255, g: 206, b: 0))
+//                    .background(Color(r: 255, g: 206, b: 0))
+//                    .background(Color("accentColor"))
+
+//                    Color(r: 255, g: 193, b: 87)
                     .cornerRadius(16, corners: [.bottomRight, .bottomLeft])
                     
                     HStack {
-                        HomeSegmentedControl(myCreatedState: $myCreatedState)
+                        HomeSegmentedControl(myCreatedState: $homePageState)
 //                                .background(Color(r: 247, g: 247, b: 247))
                             .cornerRadius(4)
                         Spacer()
                     }.padding(.top, 12)
                     .padding(.leading, 24)
                     
+                    if (showDownloadOptions) {
+                                        VStack {
+//                                               HStack {
+//                                                   Text("Enter document id or scan QR")
+//                                                       .foregroundColor(.black)
+//                                                       .font(.footnote)
+//                                                   Spacer()
+//                                               }
+                                               HStack {
+                                                   TextField("ID", text: $documentId, onCommit: {
+                                                       handleTypeIn()
+                                                    self.showDownloadOptions = false
+                                                       UIApplication.shared.endEditing()
+                                                   })
+                                                   .foregroundColor(.black)
+                                                   .padding()
+                                                   .background(Color.white)
+                                                   .frame(height: 49)
+                                                   .cornerRadius(8)
+                                                   .padding(.trailing, 8)
+                   
+                   
+                   
+                   
+                                                   Button(action: scanQRDownloaded) {
+                                                       Image(systemName: "qrcode")
+                           //                                .frame(width: 24, height: 24)
+                                                           .resizable()
+                                                           .padding(13)
+                                                           .accentColor(.black)
+                                                   }.frame(width: 49, height: 49)
+                                                   .background(Color.white)
+                                                   .clipped()
+                                                   .cornerRadius(8)
+                                               }.frame(height: 49)
+                                               .padding(.top, 8)
+                                           }
+                                        .padding(.horizontal, 24)
+                                        .clipped()
+                                        .cornerRadius(8)
+                                        .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 4, x: 0, y: 0)
+                                        
+                    }
+                    
                     ScrollView {
                         
                         
                        
-                        if myCreatedState {
+                        if homePageState {
                         
                         ForEach(globalEnviroment.loadedDocuments, id: \.cdID) { document in
                             NavigationLink(destination: DetailedLoadedDocumentModel(globalEnviroment: globalEnviroment, document: document, completeArray: arrayStringOf(document.fieldsToFill.count))) {
@@ -192,11 +186,11 @@ struct ContentView: View {
                                     }
                                     print("\(document.name)")
                                 })
-                                    .background(Color(UIColor.systemBackground))
+                                .background(Color(UIColor.systemBackground))
                                     .clipped()
-                                    .cornerRadius(4)
+                                    .cornerRadius(8)
                                     .padding(.horizontal, 24) //bycicle
-                                    .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 5, x: 0, y: 0)
+                                    .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 4, x: 0, y: 0)
                                     
                             }.buttonStyle(PlainButtonStyle())
                                 
@@ -249,7 +243,7 @@ struct ContentView: View {
                                     })
                                         .background(Color(UIColor.systemBackground))
                                         .clipped()
-                                        .cornerRadius(4)
+                                        .cornerRadius(8)
                                         .padding(.horizontal, 24)
                                         .padding(.top, 16)//bycicle
                                         .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 5, x: 0, y: 0)
@@ -272,7 +266,7 @@ struct ContentView: View {
                             self.personalDataIsPresented = false
 
                         } ,content: {
-                            PersonalDataView(managedObjectContext: self.managedObjectContext, globalEnviroment: globalEnviroment)
+                            PersonalDataView(globalEnviroment: globalEnviroment)
                         })
                     Text("").frame(width: 0, height: 0, alignment: .bottom)
                         .sheet(isPresented: $qrScanIsPresented, onDismiss: {
@@ -308,18 +302,19 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Button(action: addCreated) {
+                        Button(action: homePageState ? downloadDocument : addCreated) {
                             HStack {
                                 Spacer()
-                                Text("Create new document")
+                                Text(homePageState ? "Download" : "Create")
                                     .font(.headline)
                                     .foregroundColor(.black)
                                     .padding()
                                 Spacer()
                             }
                         }
+                        .clipped()
                         .background(Color(r: 240, g: 240, b: 240))
-                        .cornerRadius(4)
+                        .cornerRadius(8)
                         .padding(.top, 20)
                         .padding(.bottom, 40)
 //                        .shadow(color: Color(r: 230, g: 230, b: 230)!, radius: 5, x: 0, y: 0)
@@ -338,6 +333,26 @@ struct ContentView: View {
             }
         }
 
+    }
+    
+    func downloadDocument() {
+        if (showDownloadOptions) {
+            DispatchQueue.main.async {
+                withAnimation {
+                    showDownloadOptions = false
+                }
+            }
+            handleTypeIn()
+            
+           
+        } else {
+            DispatchQueue.main.async {
+                withAnimation {
+                    showDownloadOptions = true
+                }
+            }
+           
+        }
     }
     
     func arrayStringOf(_ size: Int) -> [String]{
@@ -361,6 +376,9 @@ struct ContentView: View {
     }
 
     func scanQRDownloaded() {
+        withAnimation {
+            self.showDownloadOptions = false
+        }
         qrScanIsPresented = true
 
         withAnimation {
@@ -403,6 +421,9 @@ struct ContentView: View {
     }
     
     func handleTypeIn() {
+        withAnimation {
+        self.showDownloadOptions = false
+        }
         typeInIsPresented = false
 
 

@@ -17,35 +17,50 @@ struct SharedResultView: View {
     let pasteboard = UIPasteboard.general
     var body: some View {
         VStack {
-            Spacer()
             HStack {
-                Spacer()
                 Text(documentTitle)
-                    .foregroundColor(.primary).font(.headline)
+                    .foregroundColor(.primary)
+                    .font(.title)
+                    .bold()
+                
                     
                 Spacer()
-            }
+            }.padding(.top, 40)
+            .padding(.horizontal, 24)
             HStack {
-                Spacer()
                 Text(docId)
                     .foregroundColor(.secondary)
                     .font(.subheadline)
                 Spacer()
-            }.padding()
+            }.padding(.horizontal, 24)
             Image(uiImage: generateQRCode(from: docId) ?? UIImage())
                 .interpolation(.none)
                 .resizable()
                 .scaledToFit()
                 .clipped()
                 .padding()
+            
+            Spacer()
+            
             Button(action: {
                 pasteboard.string = docId
+
             }) {
-                Text("Скопировать")
-                    .font(.title2)
-                    .foregroundColor(.accentColor)
+                HStack {
+                    Spacer()
+                    Text("Copy")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding()
+                    Spacer()
+                }
             }
-            Spacer()
+            .clipped()
+            .background(Color(r: 240, g: 240, b: 240))
+            .cornerRadius(8)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 20)
+            
         }
     }
     
